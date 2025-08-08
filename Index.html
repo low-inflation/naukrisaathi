@@ -3,95 +3,130 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Naukri Saathi</title>
+  <title>Naukri Saathi - Government Jobs by Eligibility</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f5e7; /* Light beige paper-like background */
+    }
+    header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      position: relative;
+    }
+    #google_translate_element {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+    h1 {
+      margin: 0;
+    }
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 1rem;
+    }
+    .eligibility-section {
+      background: white;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.05);
+    }
+    .eligibility-section h2 {
+      margin-top: 0;
+    }
+    .eligibility-section p {
+      margin-bottom: 0.8rem;
+      color: #333;
+    }
+    .exam-list {
+      margin-left: 1rem;
+    }
+    .cta-button {
+      display: inline-block;
+      background-color: #27ae60;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 0.8rem;
+    }
+    footer {
+      background-color: #2c3e50;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+  </style>
 </head>
 <body>
   <header>
-    <div class="container">
-      <h1>Naukri Saathi</h1>
-      <p>Your Free Guide to Sarkari Naukri Preparation</p>
-      <a href="#" class="cta-button">Join Telegram/WhatsApp Group</a>
-    </div>
+    <h1>Naukri Saathi</h1>
+    <p>Your Friend in the Journey to a Government Job</p>
+    <div id="google_translate_element"></div>
+    <a href="#" class="cta-button">Join Telegram/WhatsApp Group</a>
   </header>
 
-  <div id="google_translate_element" style="text-align:center; margin: 20px;"></div>
-
   <main class="container">
-    <section class="hero">
-      <h2>Crack Government Exams with 100% Free Study Resources</h2>
-      <p>Curated YouTube playlists, official PDFs & PYQs — trusted by real aspirants across India</p>
-      <div class="cta-buttons">
-        <a href="class10.html" class="cta-box">📘 Class 10 Jobs</a>
-        <a href="class12.html" class="cta-box">📗 Class 12 Jobs</a>
-        <a href="graduate.html" class="cta-box">🎓 Graduate Jobs</a>
-      </div>
-    </section>
 
-    <section>
-      <h3>Why Naukri Saathi?</h3>
-      <ul>
-        <li>🎯 All exam info in one place — no need to search blindly</li>
-        <li>📚 Only free & official sources </li>
-        <li>📱 Works on phones even with slow internet</li>
-        <li>❤️ Built for students from small towns, Assam & beyond</li>
+    <div class="eligibility-section">
+      <h2>📚 After Class 10</h2>
+      <p>Government jobs you can apply for right after matriculation. Great for starting your career early.</p>
+      <ul class="exam-list">
+        <li>SSC MTS – Office helper roles</li>
+        <li>SSC GD Constable – Police jobs in CAPFs</li>
+        <li>Railway Group D – Track maintainer, helper</li>
       </ul>
-    </section>
+      <a href="class10.html" class="cta-button">View All Jobs</a>
+    </div>
 
-    <section>
-      <h3>Explore Jobs by Qualification</h3>
-      <div class="job-links">
-        <div class="job-box">
-          <h4>📘 Class 10 Jobs</h4>
-          <p>Government exams including Police, Railways, Army</p>
-          <a href="class10.html">Explore →</a>
-        </div>
-        <div class="job-box">
-          <h4>📗 Class 12 Jobs</h4>
-          <p>CHSL, Police, Agniveer, Post Office and more</p>
-          <a href="class12.html">Explore →</a>
-        </div>
-        <div class="job-box">
-          <h4>🎓 Graduation Level</h4>
-          <p>SSC CGL, IBPS, UPSC, State PSC, Railways</p>
-          <a href="graduate.html">Explore →</a>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h3>What You Get</h3>
-      <ul>
-        <li>✅ PDF download links</li>
-        <li>✅ Free YouTube videos & playlists</li>
-        <li>✅ Previous year papers (PYQs)</li>
-        <li>✅ Syllabus, eligibility, tips to crack</li>
+    <div class="eligibility-section">
+      <h2>🎓 After Class 12</h2>
+      <p>Jobs with better pay and more responsibilities. Perfect for intermediate graduates.</p>
+      <ul class="exam-list">
+        <li>SSC CHSL – Clerk, DEO, Postal Assistant</li>
+        <li>RRB NTPC – Railway clerk and guard</li>
+        <li>Defence Agniveer – Air Force & Navy roles</li>
       </ul>
-    </section>
+      <a href="class12.html" class="cta-button">View All Jobs</a>
+    </div>
 
-    <section>
-      <h3>About Naukri Saathi</h3>
-      <p>We built Naukri Saathi while working with rural students in Assam. This platform gives them one clutter free, free, trustworthy place to begin and succeed.</p>
-    </section>
+    <div class="eligibility-section">
+      <h2>🎓 After Graduation</h2>
+      <p>High-level competitive exams for central and state government posts.</p>
+      <ul class="exam-list">
+        <li>UPSC Civil Services – IAS, IPS, IFS</li>
+        <li>SSC CGL – Income Tax Inspector, Auditor</li>
+        <li>Bank PO – SBI & IBPS Probationary Officer</li>
+      </ul>
+      <a href="graduation.html" class="cta-button">View All Jobs</a>
+    </div>
+
   </main>
 
   <footer>
-    <div class="container">
-      <p>© 2025 Naukri Saathi | Built with love for job aspirants. Contact: 7987044920</p>
-    </div>
-
-    <script type="text/javascript">
-      function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-          pageLanguage: 'en',
-          includedLanguages: 'en,as,hi,bn',
-          layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-        }, 'google_translate_element');
-      }
-    </script>
-    <script type="text/javascript" 
-      src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
-    </script>
+    <p>© 2025 Naukri Saathi | All resources are free & official</p>
   </footer>
+
+  <!-- Google Translate Script -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement(
+        {pageLanguage: 'en'},
+        'google_translate_element'
+      );
+    }
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </body>
 </html>
