@@ -1,129 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Naukri Saathi</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Naukri Saathi - Your Sarkari Job Guide</title>
+  <link rel="stylesheet" href="style.css">
   <style>
     body {
       font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
       margin: 0;
       padding: 0;
-      background: #faf8f3; /* paper-like background */
+      color: #333;
     }
     header {
-      text-align: center;
-      padding: 1.5rem;
-      background: #2a6f97;
+      background-color: #4CAF50;
       color: white;
+      padding: 1.5rem 1rem;
+      text-align: center;
     }
     header h1 {
       margin: 0;
+      font-size: 2rem;
     }
-    .container {
-      width: 90%;
-      max-width: 900px;
-      margin: auto;
+    header p {
+      margin-top: 0.5rem;
     }
-    nav {
-      display: flex;
-      justify-content: space-around;
-      background: #dbe7e4;
+    .translate-bar {
+      margin: 1rem auto;
+      text-align: center;
+    }
+    .search-box {
+      text-align: center;
+      margin: 1.5rem auto;
+    }
+    .search-box input {
+      width: 80%;
+      max-width: 500px;
+      padding: 0.7rem;
+      border-radius: 25px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
       padding: 1rem;
-      border-radius: 8px;
-      margin: 1rem 0;
     }
-    nav a {
-      text-decoration: none;
-      color: #023047;
-      font-weight: bold;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
-    .section {
-      background: white;
-      padding: 1rem;
-      margin: 1rem 0;
-      border-radius: 8px;
+    .category-card {
+      background-color: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      text-align: center;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.2s;
     }
-    .section h2 {
+    .category-card:hover {
+      transform: scale(1.05);
+    }
+    .category-card h3 {
       margin-top: 0;
+      color: #4CAF50;
+    }
+    .notice-board {
+      background: #fff3cd;
+      padding: 1rem;
+      margin: 1rem;
+      border: 1px solid #ffeeba;
+      border-radius: 8px;
     }
     footer {
+      background-color: #333;
+      color: white;
       text-align: center;
       padding: 1rem;
-      background: #2a6f97;
-      color: white;
       margin-top: 2rem;
-    }
-    #google_translate_element {
-      margin-top: 0.5rem;
     }
   </style>
 </head>
 <body>
-
   <header>
-    <h1>📘 Naukri Saathi</h1>
-    <p>Your friend in the journey to a government job</p>
-    <div id="google_translate_element"></div>
+    <h1>Naukri Saathi</h1>
+    <p>Your Friend in the Journey to a Government Job</p>
   </header>
 
-  <div class="container">
-    <p style="text-align:center;">
-      Choose your language above: Assamese (অসমীয়া), Hindi (हिन्दी)
-    </p>
+  <div class="translate-bar" id="google_translate_element"></div>
 
-    <nav>
-      <a href="class10.html">📚 Class 10 Jobs</a>
-      <a href="class12.html">🎓 Class 12 Jobs</a>
-      <a href="graduation.html">🎯 Graduation Jobs</a>
-    </nav>
-
-    <div class="section">
-      <h2>🌟 Why Naukri Saathi?</h2>
-      <ul>
-        <li>Free job updates for students in Bodoland & Assam</li>
-        <li>Official notifications and syllabus PDFs</li>
-        <li>YouTube playlists for easy learning</li>
-        <li>Simple tips to crack exams</li>
-      </ul>
-    </div>
-
-    <div class="section">
-      <h2>🚀 How to Use?</h2>
-      <ol>
-        <li>Click your class level above (Class 10 / 12 / Graduation)</li>
-        <li>Read about the exams and jobs</li>
-        <li>Download free syllabus and previous year papers</li>
-        <li>Join our group for updates</li>
-      </ol>
-    </div>
+  <div class="search-box">
+    <input type="text" placeholder="Search for jobs, exams, or resources...">
   </div>
 
+  <section class="categories">
+    <div class="category-card" onclick="location.href='class10.html'">
+      <h3>📚 Class 10 Jobs</h3>
+      <p>Government jobs you can apply after Class 10.</p>
+    </div>
+    <div class="category-card" onclick="location.href='class12.html'">
+      <h3>📘 Class 12 Jobs</h3>
+      <p>Opportunities after passing Class 12.</p>
+    </div>
+    <div class="category-card" onclick="location.href='graduation.html'">
+      <h3>🎓 Graduation Jobs</h3>
+      <p>Jobs for degree holders.</p>
+    </div>
+    <div class="category-card" onclick="location.href='scholarships.html'">
+      <h3>💰 Scholarships</h3>
+      <p>Free education funding opportunities.</p>
+    </div>
+    <div class="category-card" onclick="location.href='skills.html'">
+      <h3>🛠 Skill Training</h3>
+      <p>Government skill development programs.</p>
+    </div>
+  </section>
+
+  <section class="notice-board">
+    <h3>📢 Notice Board</h3>
+    <p>No new updates yet. Stay tuned!</p>
+  </section>
+
   <footer>
-    <p>© 2025 Naukri Saathi | All resources free & official</p>
+    <p>© 2025 Naukri Saathi | Visits: <span id="visitorCount">0</span></p>
   </footer>
 
-<script type="text/javascript">
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement(
-      {
+  <!-- Visitor Counter -->
+  <script src="https://api.countapi.xyz/hit/naukri-saathi/visits?callback=cb"></script>
+  <script>
+    function cb(response) {
+      document.getElementById('visitorCount').innerText = response.value;
+    }
+  </script>
+
+  <!-- Google Translate -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
         pageLanguage: 'en',
         includedLanguages: 'as,hi',
         layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-      },
-      'google_translate_element'
-    );
-  }
-</script>
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-
+      }, 'google_translate_element');
+    }
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
-</html>
-
-
+  </html>
+  
