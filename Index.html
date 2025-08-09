@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Naukri Saathi - Your Sarkari Job Guide</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f8f9fa;
+      background-color: #f8fafc;
       margin: 0;
       padding: 0;
       color: #333;
     }
     header {
-      background-color: #4CAF50;
+      background-color: #0077b6;
       color: white;
       padding: 1.5rem 1rem;
       text-align: center;
@@ -24,125 +24,115 @@
       font-size: 2rem;
     }
     header p {
-      margin-top: 0.5rem;
+      margin: 0.5rem 0 0;
+      font-size: 1.1rem;
     }
-    .translate-bar {
-      margin: 1rem auto;
-      text-align: center;
-    }
-    .search-box {
-      text-align: center;
-      margin: 1.5rem auto;
-    }
-    .search-box input {
-      width: 80%;
-      max-width: 500px;
-      padding: 0.7rem;
-      border-radius: 25px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-    }
-    .categories {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    nav {
+      margin: 2rem auto;
+      display: flex;
+      flex-wrap: wrap;
       gap: 1rem;
+      justify-content: center;
+    }
+    nav a {
+      background: #0096c7;
+      color: white;
+      padding: 0.8rem 1.2rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: background 0.3s;
+    }
+    nav a:hover {
+      background: #023e8a;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
       padding: 1rem;
     }
-    .category-card {
-      background-color: white;
-      padding: 1.5rem;
-      border-radius: 10px;
-      text-align: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-    .category-card:hover {
-      transform: scale(1.05);
-    }
-    .category-card h3 {
-      margin-top: 0;
-      color: #4CAF50;
-    }
-    .notice-board {
+    .tip-box {
       background: #fff3cd;
-      padding: 1rem;
-      margin: 1rem;
-      border: 1px solid #ffeeba;
-      border-radius: 8px;
+      border: 2px solid #ffec99;
+      padding: 10px 15px;
+      border-radius: 6px;
+      margin: 15px auto;
+      max-width: 500px;
+      font-size: 1.05em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
     footer {
-      background-color: #333;
-      color: white;
+      background: #e9ecef;
       text-align: center;
       padding: 1rem;
       margin-top: 2rem;
+      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Naukri Saathi</h1>
-    <p>Your Friend in the Journey to a Government Job</p>
-  </header>
-
-  <div class="translate-bar" id="google_translate_element"></div>
-
-  <div class="search-box">
-    <input type="text" placeholder="Search for jobs, exams, or resources...">
-  </div>
-
-  <section class="categories">
-    <div class="category-card" onclick="location.href='class10.html'">
-      <h3>📚 Class 10 Jobs</h3>
-      <p>Government jobs you can apply after Class 10.</p>
-    </div>
-    <div class="category-card" onclick="location.href='class12.html'">
-      <h3>📘 Class 12 Jobs</h3>
-      <p>Opportunities after passing Class 12.</p>
-    </div>
-    <div class="category-card" onclick="location.href='graduation.html'">
-      <h3>🎓 Graduation Jobs</h3>
-      <p>Jobs for degree holders.</p>
-    </div>
-    <div class="category-card" onclick="location.href='scholarships.html'">
-      <h3>💰 Scholarships</h3>
-      <p>Free education funding opportunities.</p>
-    </div>
-    <div class="category-card" onclick="location.href='skills.html'">
-      <h3>🛠 Skill Training</h3>
-      <p>Government skill development programs.</p>
-    </div>
-  </section>
-
-  <section class="notice-board">
-    <h3>📢 Notice Board</h3>
-    <p>No new updates yet. Stay tuned!</p>
-  </section>
-
-  <footer>
-    <p>© 2025 Naukri Saathi | Visits: <span id="visitorCount">0</span></p>
-  </footer>
-
-  <!-- Visitor Counter -->
-  <script src="https://api.countapi.xyz/hit/naukri-saathi/visits?callback=cb"></script>
-  <script>
-    function cb(response) {
-      document.getElementById('visitorCount').innerText = response.value;
-    }
-  </script>
 
   <!-- Google Translate -->
+  <div id="google_translate_element" style="text-align: right; margin: 10px;"></div>
+
+  <header>
+    <h1>📘 Naukri Saathi</h1>
+    <p>Your friend in finding government jobs after school</p>
+  </header>
+
+  <!-- Language Tip Box -->
+  <div class="tip-box">
+    <span style="font-size:1.5em;">⬅️</span>
+    <span><strong>Tip:</strong> Use this button to read in <strong>Assamese</strong> or <strong>Hindi</strong>.</span>
+  </div>
+
+  <div class="container">
+    <p>
+      Welcome to <strong>Naukri Saathi</strong> – a simple guide for students and job seekers in Assam & Bodoland.  
+      Here, you will find **trusted, official, and free resources** for government job exams.  
+      Whether you just passed Class 10, Class 12, or Graduation – there’s a path for you.
+    </p>
+    <p>
+      We know many of you prefer learning in Assamese or Hindi. That’s why we’ve added a simple language switch at the top.  
+      We also give links to YouTube classes, PDFs, and important dates – so you don’t miss any opportunity.
+    </p>
+  </div>
+
+  <nav>
+    <a href="class10.html">📚 Jobs After Class 10</a>
+    <a href="class12.html">📗 Jobs After Class 12</a>
+    <a href="graduation.html">📙 Jobs After Graduation</a>
+  </nav>
+
+  <div class="container">
+    <h2>Why Use Naukri Saathi?</h2>
+    <ul>
+      <li>✅ Free & official study materials</li>
+      <li>✅ Easy to read in your own language</li>
+      <li>✅ Simple guidance for rural youth</li>
+      <li>✅ Covers central & Assam state jobs</li>
+    </ul>
+  </div>
+
+  <footer>
+    <p>© 2025 Naukri Saathi | Made with ❤️ for the youth of Assam & Bodoland</p>
+  </footer>
+
+  <!-- Google Translate Scripts -->
   <script type="text/javascript">
     function googleTranslateElementInit() {
       new google.translate.TranslateElement({
         pageLanguage: 'en',
-        includedLanguages: 'as,hi',
+        includedLanguages: 'en,as,hi',
         layout: google.translate.TranslateElement.InlineLayout.SIMPLE
       }, 'google_translate_element');
     }
   </script>
-  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script type="text/javascript"
+    src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+  </script>
+
 </body>
-  </html>
-  
+</html>
