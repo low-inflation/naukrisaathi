@@ -1,179 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Exam — Naukri Saathi</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="examTitle">Exam Details - Naukri Saathi</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    body { font-family: Arial, sans-serif; background:#fdf6e3; color:#222; margin:0; padding:1rem; }
-    .container { max-width:900px; margin:auto; background:white; padding:1rem 1.2rem; border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.06); }
-    a.back { display:inline-block; margin-bottom:0.5rem; color:#007bff; text-decoration:none; }
-    h1 { margin:0.2rem 0 0.6rem; color:#1f3b4d; }
-    .top-note { color:#555; font-size:0.95rem; margin-bottom:0.8rem; }
-    .info { background:#e8f5e9; border-left:4px solid #4CAF50; padding:0.8rem; margin:0.6rem 0; border-radius:4px; }
-    .warning { background:#fff3cd; border-left:4px solid #ff9800; padding:0.8rem; margin:0.6rem 0; border-radius:4px; }
-    section { margin:1rem 0; }
-    ul { padding-left:1.1rem; }
-    table { width:100%; border-collapse:collapse; margin-top:0.6rem; }
-    table, th, td { border:1px solid #ddd; }
-    th, td { padding:8px; text-align:left; }
-    .cta { display:inline-block; margin-top:0.6rem; background:#4CAF50; color:white; padding:0.5rem 0.9rem; border-radius:6px; text-decoration:none; font-weight:600; }
-    .meta { font-size:0.95rem; color:#444; margin-bottom:0.6rem; }
-    .small { font-size:0.9rem; color:#666; }
-    .links a { color:#007bff; text-decoration:none; }
-    @media (max-width:640px){ .container{ padding:0.8rem } }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #faf7f0;
+      line-height: 1.6;
+      padding: 10px;
+    }
+    h1, h2 {
+      color: #2a4d69;
+    }
+    section {
+      background: #fff;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    a {
+      color: #1a73e8;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .cta-button {
+      display: inline-block;
+      padding: 8px 12px;
+      background: #4CAF50;
+      color: #fff;
+      border-radius: 5px;
+      text-decoration: none;
+      margin-top: 10px;
+    }
+    .cta-button:hover {
+      background: #45a049;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <a class="back" href="class10.html">← Back to Class 10 Jobs</a>
 
-    <!-- Google Translate dropdown -->
-    <div id="google_translate_element" style="text-align:right; margin-bottom:8px;"></div>
-    <p class="top-note">📢 Change language using the box above to read this page in Assamese or Hindi.</p>
+  <div id="google_translate_element" style="text-align: right; margin-bottom: 10px;"></div>
+  <a href="class10.html" class="cta-button">← Back to Class 10 Jobs</a>
+  
+  <h1 id="examName">Loading...</h1>
+  <p id="tagline"></p>
 
-    <h1 id="title">Loading…</h1>
-    <div id="subtitle" class="small"></div>
+  <section>
+    <h2>🔍 About</h2>
+    <div id="about"></div>
+  </section>
 
-    <div id="why" class="info" style="display:none;"></div>
+  <section>
+    <h2>🎓 Who can apply?</h2>
+    <div id="eligibility"></div>
+  </section>
 
-    <section id="aboutSection"><h2>🔍 About</h2><div id="about"></div></section>
-    <section id="eligibilitySection"><h2>🎓 Who can apply?</h2><ul id="eligibility"></ul></section>
-    <section id="rolesSection"><h2>💼 Job roles</h2><ul id="roles"></ul></section>
-    <section id="patternSection"><h2>📝 Exam pattern</h2><div id="pattern"></div></section>
-    <section id="datesSection"><h2>📅 Important dates</h2><div id="dates" class="small"></div></section>
-    <section id="tipsSection"><h2>💡 Tips</h2><ul id="tips"></ul></section>
+  <section>
+    <h2>💼 Job roles</h2>
+    <div id="jobRoles"></div>
+  </section>
 
-    <section id="resourcesSection"><h2>🔗 Resources</h2>
-      <div class="links">
-        <div>📄 Notification / Syllabus: <a id="pdfLink" href="#" target="_blank">Open</a></div>
-        <div>📄 Previous Year Papers: <a id="pyqLink" href="#" target="_blank">Open</a></div>
-      </div>
+  <section>
+    <h2>📝 Exam pattern</h2>
+    <div id="examPattern"></div>
+  </section>
 
-      <h3 style="margin-top:0.8rem">📺 YouTube study links</h3>
-      <ul id="yt"></ul>
+  <section>
+    <h2>📅 Important dates</h2>
+    <div id="importantDates"></div>
+  </section>
 
-      <div style="margin-top:0.8rem;"><span>🌐 Official site: </span><a id="official" href="#" target="_blank"></a></div>
-    </section>
+  <section>
+    <h2>💡 Tips</h2>
+    <div id="tips"></div>
+  </section>
 
-    <section id="howApplySection"><h2>🌐 How to apply</h2><div id="howApply"></div>
-      <a id="applyBtn" class="cta" href="#" target="_blank" style="display:none;">Apply Online</a>
-    </section>
+  <section>
+    <h2>🔗 Resources</h2>
+    <div id="resources"></div>
+  </section>
 
-    <p class="small">Note: Data is loaded from a Google Sheet. If something looks wrong, contact the site admin or check the official website.</p>
-  </div>
+  <section>
+    <h2>🌐 Official site</h2>
+    <div id="officialSite"></div>
+  </section>
 
-  <!-- ---------- SCRIPT: Load data from Google Sheet (CSV) and render ---------- -->
+  <section>
+    <h2>📝 How to apply</h2>
+    <div id="howToApply"></div>
+  </section>
+
+  <footer>
+    <p style="text-align:center; margin-top: 20px;">© 2025 Naukri Saathi | All resources are free & official</p>
+  </footer>
+
+  <!-- Script to fetch from Google Sheet -->
   <script>
-  const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRVh2Dak5NekD_LAZjqbR4QRqkBmqrY0Jxm3E8Svle-6yhjebjbSWJGVZ1AAKIKuJVKL09XnoZxUlFj/pub?output=csv";
+    const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRVh2Dak5NekD_LAZjqbR4QRqkBmqrY0Jxm3E8Svle-6yhjebjbSWJGVZ1AAKIKuJVKL09XnoZxUlFj/pub?output=csv";
 
-  function csvToArray(str, delimiter = ',') {
-    const rows = str.trim().split('\n');
-    const headers = rows.shift().split(delimiter).map(h => h.trim());
-    return rows.map(row => {
-      const values = row.split(delimiter).map(v => v.trim());
-      const obj = {};
-      headers.forEach((h,i) => { obj[h] = values[i] || ""; });
-      return obj;
-    });
-  }
-
-  function getParam(name) {
-    const params = new URLSearchParams(window.location.search);
-    return params.get(name);
-  }
-
-  function setHTML(id, html){
-    const el = document.getElementById(id);
-    if(!el) return;
-    el.innerHTML = html || "";
-  }
-
-  function setTextList(id, text){
-    const el = document.getElementById(id);
-    if(!el) return;
-    el.innerHTML = "";
-    if(!text) return;
-    const items = text.split('|').map(s => s.trim()).filter(Boolean);
-    items.forEach(it => {
-      const li = document.createElement('li');
-      li.textContent = it;
-      el.appendChild(li);
-    });
-  }
-
-  function renderExam(exam){
-    if(!exam) {
-      setHTML('title','Exam not found');
-      setHTML('about','No data available for this id.');
-      return;
+    function cleanAndLinkify(text) {
+      if (!text) return "";
+      let cleaned = text.replace(/"/g, "").replace(/\n/g, "<br>");
+      cleaned = cleaned.replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank">$1</a>');
+      return cleaned;
     }
-    setHTML('title', exam.title || exam.id || 'Untitled exam');
-    setHTML('subtitle', exam.subtitle || '');
-    if (exam.why) { setHTML('why', exam.why); document.getElementById('why').style.display='block'; }
-    setHTML('about', exam.about || '');
-    setTextList('eligibility', exam.eligibility);
-    setTextList('roles', exam.roles);
-    setHTML('pattern', (exam.pattern || '').replace(/\|/g,'<br>'));
-    setHTML('dates', (exam.dates || '').replace(/\|/g,'<br>'));
-    setTextList('tips', exam.tips);
 
-    const pdf = document.getElementById('pdfLink'),
-          pyq = document.getElementById('pyqLink'),
-          off = document.getElementById('official'),
-          applyBtn = document.getElementById('applyBtn');
+    fetch(sheetURL)
+      .then(res => res.text())
+      .then(csv => {
+        let rows = csv.split("\n").map(r => r.split(","));
+        let examNameFromURL = location.pathname.split("/").pop().replace(".html", "").replace(/-/g, " ").toLowerCase();
 
-    if(exam.pdf_link) { pdf.href = exam.pdf_link; pdf.textContent = 'Notification / Syllabus'; } else { pdf.href='#'; pdf.textContent='N/A'; }
-    if(exam.pyq_link) { pyq.href = exam.pyq_link; pyq.textContent = 'PYQs'; } else { pyq.href='#'; pyq.textContent='N/A'; }
-    off.href = exam.website || '#'; off.textContent = exam.website || 'Official site';
-    if(exam.apply_link){ applyBtn.href = exam.apply_link; applyBtn.style.display='inline-block'; } else { applyBtn.style.display='none'; }
+        let headers = rows[0].map(h => h.trim().toLowerCase());
+        let examData = null;
 
-    const ytEl = document.getElementById('yt'); ytEl.innerHTML='';
-    if(exam.youtube){
-      const ytItems = exam.youtube.split('|').map(s => s.trim()).filter(Boolean);
-      ytItems.forEach(item => {
-        const li = document.createElement('li');
-        if(item.includes('http')) {
-          const parts = item.split('||');
-          if(parts.length===2) {
-            li.innerHTML = parts[0] + ': <a href="'+parts[1]+'" target="_blank">'+parts[1]+'</a>';
-          } else {
-            li.innerHTML = '<a href="'+item+'" target="_blank">'+item+'</a>';
+        for (let i = 1; i < rows.length; i++) {
+          let rowName = rows[i][0].trim().toLowerCase();
+          if (rowName === examNameFromURL) {
+            examData = {};
+            headers.forEach((h, idx) => {
+              examData[h] = rows[i][idx] || "";
+            });
+            break;
           }
-        } else li.textContent = item;
-        ytEl.appendChild(li);
-      });
-    }
-  }
-
-  (function(){
-    const id = getParam('id') || 'ssc-mts';
-    if(!SHEET_CSV_URL) return;
-    fetch(SHEET_CSV_URL)
-      .then(r => r.ok ? r.text() : Promise.reject('CSV fetch failed'))
-      .then(txt => {
-        const rows = csvToArray(txt, ',');
-        const examObj = {};
-        rows.forEach(r => { examObj[r.id] = r; });
-        if(examObj[id]) {
-          renderExam(examObj[id]);
-        } else {
-          console.warn('Exam id not found in sheet:', id);
         }
+
+        if (!examData) {
+          document.getElementById("examName").innerText = "Exam not found.";
+          return;
+        }
+
+        document.getElementById("examTitle").innerText = examData["exam name"];
+        document.getElementById("examName").innerText = examData["exam name"];
+        document.getElementById("tagline").innerHTML = cleanAndLinkify(examData["tagline"]);
+        document.getElementById("about").innerHTML = cleanAndLinkify(examData["about"]);
+        document.getElementById("eligibility").innerHTML = cleanAndLinkify(examData["eligibility"]);
+        document.getElementById("jobRoles").innerHTML = cleanAndLinkify(examData["job roles"]);
+        document.getElementById("examPattern").innerHTML = cleanAndLinkify(examData["exam pattern"]);
+        document.getElementById("importantDates").innerHTML = cleanAndLinkify(examData["important dates"]);
+        document.getElementById("tips").innerHTML = cleanAndLinkify(examData["tips"]);
+        document.getElementById("resources").innerHTML = cleanAndLinkify(examData["resources"]);
+        document.getElementById("officialSite").innerHTML = cleanAndLinkify(examData["official site"]);
+        document.getElementById("howToApply").innerHTML = cleanAndLinkify(examData["how to apply"]);
       })
       .catch(err => {
-        console.warn('Sheet fetch failed:', err);
+        console.error("Error loading data:", err);
       });
-  })();
   </script>
 
   <!-- Google Translate -->
-  <script>
-    function googleTranslateElementInit(){ new google.translate.TranslateElement({
-      pageLanguage: 'en', includedLanguages: 'en,as,hi', layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-    }, 'google_translate_element'); }
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'as,hi',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
   </script>
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </body>
 </html>
