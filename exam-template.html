@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Exam — Naukri Saathi</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Minimal page styles — adjust in style.css if needed */
+    body { font-family: Arial, sans-serif; background:#fdf6e3; color:#222; margin:0; padding:1rem; }
+    .container { max-width:900px; margin:auto; background:white; padding:1rem 1.2rem; border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.06); }
+    a.back { display:inline-block; margin-bottom:0.5rem; color:#007bff; text-decoration:none; }
+    h1 { margin:0.2rem 0 0.6rem; color:#1f3b4d; }
+    .top-note { color:#555; font-size:0.95rem; margin-bottom:0.8rem; }
+    .info { background:#e8f5e9; border-left:4px solid #4CAF50; padding:0.8rem; margin:0.6rem 0; border-radius:4px; }
+    .warning { background:#fff3cd; border-left:4px solid #ff9800; padding:0.8rem; margin:0.6rem 0; border-radius:4px; }
+    section { margin:1rem 0; }
+    ul { padding-left:1.1rem; }
+    table { width:100%; border-collapse:collapse; margin-top:0.6rem; }
+    table, th, td { border:1px solid #ddd; }
+    th, td { padding:8px; text-align:left; }
+    .cta { display:inline-block; margin-top:0.6rem; background:#4CAF50; color:white; padding:0.5rem 0.9rem; border-radius:6px; text-decoration:none; font-weight:600; }
+    .meta { font-size:0.95rem; color:#444; margin-bottom:0.6rem; }
+    .small { font-size:0.9rem; color:#666; }
+    .links a { color:#007bff; text-decoration:none; }
+    @media (max-width:640px){ .container{ padding:0.8rem } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a class="back" href="class10.html">← Back to Class 10 Jobs</a>
+
+    <!-- Google Translate dropdown -->
+    <div id="google_translate_element" style="text-align:right; margin-bottom:8px;"></div>
+    <p class="top-note">📢 Change language using the box above to read this page in Assamese or Hindi.</p>
+
+    <h1 id="title">Loading…</h1>
+    <div id="subtitle" class="small"></div>
+
+    <div id="why" class="info" style="display:none;"></div>
+
+    <section id="aboutSection"><h2>🔍 About</h2><div id="about"></div></section>
+
+    <section id="eligibilitySection"><h2>🎓 Who can apply?</h2><ul id="eligibility"></ul></section>
+
+    <section id="rolesSection"><h2>💼 Job roles</h2><ul id="roles"></ul></section>
+
+    <section id="patternSection"><h2>📝 Exam pattern</h2><div id="pattern"></div></section>
+
+    <section id="datesSection"><h2>📅 Important dates</h2><div id="dates" class="small"></div></section>
+
+    <section id="tipsSection"><h2>💡 Tips</h2><ul id="tips"></ul></section>
+
+    <section id="resourcesSection"><h2>🔗 Resources</h2>
+      <div class="links">
+        <div>📄 Notification / Syllabus: <a id="pdfLink" href="#" target="_blank">Open</a></div>
+        <div>📄 Previous Year Papers: <a id="pyqLink" href="#" target="_blank">Open</a></div>
+      </div>
+
+      <h3 style="margin-top:0.8rem">📺 YouTube study links</h3>
+      <ul id="yt"></ul>
+
+      <div style="margin-top:0.8rem;"><span>🌐 Official site: </span><a id="official" href="#" target="_blank"></a></div>
+    </section>
+
+    <section id="howApplySection"><h2>🌐 How to apply</h2><div id="howApply"></div>
+      <a id="applyBtn" class="cta" href="#" target="_blank" style="display:none;">Apply Online</a>
+    </section>
+
+    <p class="small">Note: Data is loaded from a Google Sheet. If something looks wrong, contact the site admin or check the official website.</p>
+  </div>
+
+  <!-- ---------- SCRIPT: Load data from Google Sheet (CSV) and render ---------- -->
+  <script>
+  // ---------- CONFIG ----------
+  // 1) Replace SHEET_CSV_URL with your published CSV url (see instructions below)
+  // 2) If you don't have a sheet yet, you can comment CSV_URL and the template will fall back to localData below.
+  const SHEET_CSV_URL = ""; // <-- paste your published CSV URL here (CSV format)
+  // Example form of URL from Google Sheets publish: https://docs.google.com/spreadsheets/d/e/<<ID>>/pub?output=csv
+
+  // ---------- small helper CSV -> JSON parser (works for simple CSVs) ----------
+  function csvToArray(str, delimiter = ',') {
+    const rows = str.trim().split('\n');
+    const headers = rows.shift().split(delimiter).map(h => h.trim());
+    return rows.map(row => {
+      const values = row.split(delimiter).map(v => v.trim());
+      const obj = {};
+      headers.forEach((h,i) => { obj[h] = values[i] === undefined ? "" : values[i]; });
+      return obj;
+    });
+  }
+
+  // ---------- get URL param id ----------
+  function getParam(name) {
+    const params = new URLSearchParams(window.location.search);
+    return params.get(name);
+  }
+
+  // ---------- safe HTML helper ----------
+  function setHTML(id, html){
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.innerHTML = html || "";
+  }
+
+  function setTextList(id, text){
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.innerHTML = "";
+    if(!text) return;
+    const items = text.split('|').map(s => s.trim()).filter(Boolean);
+    items.forEach(it => { const li = document.createElement('li'); li.textContent = it; el.appendChild(li); });
+  }
+
+  // ---------- render exam object to DOM ----------
+  function renderExam(exam){
+    if(!exam) {
+      setHTML('title','Exam not found');
+      setHTML('about','No data available for this id.');
+      return;
+    }
+    setHTML('title', exam.title || exam.id || 'Untitled exam');
+    setHTML('subtitle', exam.subtitle || '');
+    if (exam.why) { setHTML('why', exam.why); document.getElementById('why').style.display='block'; }
+    setHTML('about', exam.about || '');
+    setTextList('eligibility', exam.eligibility);
+    setTextList('roles', exam.roles);
+    setHTML('pattern', (exam.pattern || '').replace(/\|/g,'<br>'));
+    setHTML('dates', (exam.dates || '').replace(/\|/g,'<br>'));
+    setTextList('tips', exam.tips);
+    // resources
+    const pdf = document.getElementById('pdfLink'), pyq = document.getElementById('pyqLink'), off = document.getElementById('official'), applyBtn = document.getElementById('applyBtn');
+    if(exam.pdf_link) { pdf.href = exam.pdf_link; pdf.textContent = 'Notification / Syllabus'; } else { pdf.href='#'; pdf.textContent='N/A'; }
+    if(exam.pyq_link) { pyq.href = exam.pyq_link; pyq.textContent = 'PYQs'; } else { pyq.href='#'; pyq.textContent='N/A'; }
+    off.href = exam.website || '#'; off.textContent = exam.website || 'Official site';
+    if(exam.apply_link){ applyBtn.href = exam.apply_link; applyBtn.style.display='inline-block'; } else { applyBtn.style.display='none'; }
+    // youtube list (pipe-separated pairs: label|url or just url)
+    const ytEl = document.getElementById('yt'); ytEl.innerHTML='';
+    if(exam.youtube){
+      const ytItems = (exam.youtube||'').split('|').map(s => s.trim()).filter(Boolean);
+      ytItems.forEach(item => {
+        const li = document.createElement('li');
+        if(item.includes('http')) {
+          // optional: if label|url format
+          const parts = item.split('||');
+          if(parts.length===2) {
+            li.innerHTML = parts[0] + ': <a href="'+parts[1]+'" target="_blank">'+parts[1]+'</a>';
+          } else {
+            li.innerHTML = '<a href="'+item+'" target="_blank">'+item+'</a>';
+          }
+        } else li.textContent = item;
+        ytEl.appendChild(li);
+      });
+    }
+  }
+
+  // ---------- fallback local data (used if sheet missing or for testing) ----------
+  const localData = [
+    {
+      id: 'ssc-mts',
+      title: 'SSC MTS & Havaldar',
+      subtitle: 'Multi-Tasking Staff and Havaldar (Class 10)',
+      why: 'Stable govt salary, pension, and respect — good for early starters after Class 10.',
+      about: 'Recruitment for MTS & Havaldar posts across Central Government departments.',
+      eligibility: 'Class 10 pass|Age 18–25 (MTS), 18–27 (Havaldar)|Indian citizen',
+      roles: 'Office support tasks|Security and vigilance (Havaldar)',
+      pattern: 'Stage1: CBT (90 min) — Reasoning | Maths | English | GA|Stage2: Physical tests for Havaldar',
+      dates: 'Notification: June 2025|Apply: June–July 2025|Exam: Sept–Oct 2025',
+      tips: 'Practice PYQs|Mock tests|Daily GA reading',
+      pdf_link: 'https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Notice_of_adv_mts_2025.pdf',
+      pyq_link: 'https://www.adda247.com/jobs/ssc-mts-previous-year-question-paper/',
+      youtube: 'Reasoning||https://www.youtube.com/watch?v=QyJDGPdSUU4|Maths||https://www.youtube.com/playlist?list=PLxtzKdPI7iWOz8A59uDwJB6mzxPggHduJ',
+      website: 'https://ssc.nic.in',
+      apply_link: 'https://ssc.nic.in'
+    },
+    {
+      id:'ssc-gd',
+      title:'SSC GD Constable',
+      subtitle:'Constables for CAPFs, Assam Rifles & SSF',
+      why:'Good salary, disciplined job, and chance to serve the nation.',
+      about:'Recruitment for General Duty Constables in paramilitary forces.',
+      eligibility: 'Class 10 pass|Age 18–23 (relaxations apply)|Indian citizen',
+      roles: 'Patrolling|Security duties|Assistance in emergencies',
+      pattern: 'CBT: 60 min — Reasoning | GA | Maths | Language|PET: 5km / 24min (men)|PST: Height & chest standards',
+      dates: 'Notification: As released on ssc.nic.in|Exam: Feb–Mar (approx)',
+      tips: 'Physical training daily|Practice PYQs|Time management',
+      pdf_link: 'https://ssc.nic.in/SSCFileServer/PortalManagement/UploadedFiles/notice_GDConstable_01122023.pdf',
+      pyq_link: 'https://www.adda247.com/defence-jobs/ssc-gd-previous-year-papers/',
+      youtube: 'Reasoning||https://www.youtube.com/playlist?list=PL5gV37jQSHpD7P9Y8N0m7bEwAl0Rxu-nn|GK||https://www.youtube.com/watch?v=Rkqz1s3uWnE',
+      website: 'https://ssc.nic.in',
+      apply_link: 'https://ssc.nic.in'
+    }
+  ];
+
+  // ---------- main: try Google Sheet (CSV) then fallback to localData ----------
+  (function(){
+    const id = getParam('id') || 'ssc-mts';
+    if(!SHEET_CSV_URL) {
+      // no sheet set — use localData
+      const found = localData.find(e => e.id === id);
+      renderExam(found || localData[0]);
+      return;
+    }
+
+    // fetch CSV
+    fetch(SHEET_CSV_URL)
+      .then(r => r.ok ? r.text() : Promise.reject('CSV fetch failed'))
+      .then(txt => {
+        // parse CSV into array of objects
+        const rows = csvToArray(txt, ',');
+        // rows must include a column named "id"
+        const examObj = {};
+        rows.forEach(r => { examObj[r.id] = r; });
+        // render selected id
+        if(examObj[id]) {
+          renderExam(examObj[id]);
+        } else {
+          // not found -> fallback to local or first row
+          console.warn('Exam id not found in sheet:', id);
+          renderExam(localData.find(e=>e.id===id) || localData[0]);
+        }
+      })
+      .catch(err => {
+        console.warn('Sheet fetch failed, using local data. Err:', err);
+        const found = localData.find(e => e.id === id);
+        renderExam(found || localData[0]);
+      });
+  })();
+  </script>
+
+  <!-- Google Translate -->
+  <script>
+    function googleTranslateElementInit(){ new google.translate.TranslateElement({
+      pageLanguage: 'en', includedLanguages: 'en,as,hi', layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element'); }
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
