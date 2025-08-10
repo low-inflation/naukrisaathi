@@ -87,6 +87,26 @@
         font-size: 1.2rem;
       }
     }
+    .button-apply {
+  display: inline-block;
+  background: #ff6b35;
+  color: #fff;
+  padding: 0.8rem 1.6rem;
+  border-radius: 999px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+.button-apply:hover {
+  background: #e85a2c;
+  transform: translateY(-2px);
+}
+.button-apply:active {
+  transform: translateY(0);
+}
+
   </style>
 </head>
 <body>
@@ -130,7 +150,7 @@
     <p><a id="official-site" href="#" target="_blank">Visit Official Website</a></p>
 
     <h2>📝 How to Apply</h2>
-    <a id="apply-link" href="#" target="_blank">Apply Online</a>
+    <a id="apply-link" class="button-apply" href="#" target="_blank">Apply Online</a>
   </main>
 
   <footer>
