@@ -120,18 +120,12 @@
     <p>No new updates yet. Stay tuned!</p>
   </section>
 
-  <footer>
-    <p>© 2025 Naukri Saathi | Visits: <span id="visitorCount">0</span></p>
-  </footer>
+<footer>
+  <p>© 2025 Naukri Saathi | 
+    <img src="https://hits.sh/naukrisaathi.netlify.app.svg?style=flat-square&label=Visits&color=4CAF50" alt="Visitor Count">
+  </p>
+</footer>
 
-<!-- Visitor Counter -->
-<script>
-fetch('https://api.countapi.xyz/hit/naukri-saathi/visits')
-  .then(res => res.json())
-  .then(res => {
-    document.getElementById('visitorCount').innerText = res.value;
-  });
-</script>
 
 
   <!-- Google Translate -->
@@ -147,7 +141,9 @@ fetch('https://api.countapi.xyz/hit/naukri-saathi/visits')
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 
+
 </body>
 </html>
+
 
 
