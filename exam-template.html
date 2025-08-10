@@ -100,4 +100,94 @@
 
   <section>
     <h2>📝 How to apply</h2>
-    <p>
+    <p><a id="apply-link" href="#" class="cta-button" target="_blank" rel="noopener noreferrer">Apply Online</a></p>
+  </section>
+
+  <footer>
+    <p style="text-align:center; margin-top: 20px;">© 2025 Naukri Saathi | All resources are free & official</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRVh2Dak5NekD_LAZjqbR4QRqkBmqrY0Jxm3E8Svle-6yhjebjbSWJGVZ1AAKIKuJVKL09XnoZxUlFj/pub?output=tsv";
+
+      fetch(sheetUrl)
+        .then(res => {
+          if (!res.ok) throw new Error("Network response was not ok");
+          return res.text();
+        })
+        .then(text => {
+          // Split TSV data
+          let rows = text.trim().split("\n").map(r => r.split("\t"));
+          let headers = rows[0];
+          let exams = rows.slice(1);
+
+          console.log("Loaded exams:", exams.length);
+
+          // Extract exam ID from URL like "examid.html"
+          let examId = window.location.pathname.split("/").pop().replace(".html", "");
+          console.log("Exam ID from URL:", examId);
+
+          // Find the exam row matching the examId in first column
+          let exam = exams.find(r => r[0] === examId);
+
+          if (!exam) {
+            document.querySelector("#exam-title").textContent = "Exam Not Found";
+            return;
+          }
+
+          let data = {};
+          headers.forEach((h, i) => data[h] = exam[i] || "");
+
+          // Format multi-value fields separated by |
+          const formatMulti = str => str ? str.split("|").map(s => s.trim()).join("<br>") : "";
+
+          document.querySelector("#exam-title").textContent = data.title;
+          document.querySelector("#exam-subtitle").textContent = data.subtitle;
+          document.querySelector("#exam-why").innerHTML = data.why || "";
+          document.querySelector("#exam-about").innerHTML = data.about || "";
+          document.querySelector("#exam-eligibility").innerHTML = formatMulti(data.eligibility);
+          document.querySelector("#exam-roles").innerHTML = formatMulti(data.roles);
+          document.querySelector("#exam-pattern").innerHTML = formatMulti(data.pattern);
+          document.querySelector("#exam-dates").innerHTML = formatMulti(data.dates);
+          document.querySelector("#exam-tips").innerHTML = formatMulti(data.tips);
+
+          document.querySelector("#pdf-link").href = data.pdf_link || "#";
+          document.querySelector("#pyq-link").href = data.pyq_link || "#";
+
+          // Parse YouTube links: format assumed "Category | Something | URL | ..."
+          let ytHTML = "";
+          if (data.youtube) {
+            let ytParts = data.youtube.split("|").map(s => s.trim());
+            for (let i = 0; i < ytParts.length; i += 3) {
+              if (ytParts[i] && ytParts[i+2]) {
+                ytHTML += `<strong>${ytParts[i]}</strong>: <a href="${ytParts[i+2]}" target="_blank" rel="noopener noreferrer">${ytParts[i+2]}</a><br>`;
+              }
+            }
+          }
+          document.querySelector("#youtube-links").innerHTML = ytHTML;
+
+          document.querySelector("#official-site").href = data.website || "#";
+          document.querySelector("#apply-link").href = data.apply_link || "#";
+        })
+        .catch(err => {
+          console.error("Error loading exam data:", err);
+          document.querySelector("#exam-title").textContent = "Failed to load exam data.";
+        });
+    });
+  </script>
+
+  <!-- Google Translate -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'as,hi',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>
