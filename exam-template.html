@@ -8,48 +8,44 @@
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      line-height: 1.6;
-      background-color: #fdf6e3; /* paper-like background */
+      background: #fdf6e3;
       color: #333;
-      margin: 0;
       padding: 1rem;
-    }
-    .container {
       max-width: 850px;
       margin: auto;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      padding: 1.5rem;
     }
     h1, h2, h3 {
       color: #2c3e50;
+      margin-top: 1rem;
     }
-    .back-link {
-      display: inline-block;
-      margin: 1rem 0;
+    a {
       color: #007bff;
       text-decoration: none;
-      font-weight: 600;
     }
-    .back-link:hover {
+    a:hover {
       text-decoration: underline;
+    }
+    .back-link {
+      margin: 1rem 0;
+      display: inline-block;
+    }
+    .info-box, .warning-box {
+      padding: 1rem;
+      margin: 1rem 0;
+      border-left: 6px solid;
+      border-radius: 5px;
     }
     .info-box {
       background: #e8f5e9;
-      border-left: 5px solid #4caf50;
-      padding: 1rem;
-      margin: 1rem 0;
+      border-color: #4caf50;
     }
     .warning-box {
       background: #fff3cd;
-      border-left: 5px solid #ff9800;
-      padding: 1rem;
-      margin: 1rem 0;
+      border-color: #ff9800;
     }
     table {
-      border-collapse: collapse;
       width: 100%;
+      border-collapse: collapse;
       margin: 1rem 0;
     }
     table, th, td {
@@ -62,136 +58,101 @@
     ul {
       padding-left: 1.2rem;
     }
-    a {
-      color: #007bff;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
     .cta-button {
-      display: inline-block;
       background: #4caf50;
       color: white;
       padding: 0.6rem 1rem;
-      margin: 0.5rem 0;
+      margin-top: 1rem;
       border-radius: 5px;
       text-decoration: none;
       font-weight: bold;
-      transition: background-color 0.3s ease;
+      display: inline-block;
     }
     .cta-button:hover {
       background: #45a049;
     }
-    #youtube-links p {
-      margin: 0.3rem 0;
-    }
-    footer p {
-      text-align: center;
-      margin-top: 2rem;
-      font-size: 0.9rem;
-      color: #666;
-    }
-    #rural-tip {
-      font-size: 0.9rem;
-      color: #555;
-      margin-top: 1rem;
-      font-style: italic;
-    }
   </style>
 </head>
 <body>
-  <div class="container">
+  <a href="class10.html" class="back-link">← Back to Class 10 Jobs</a>
+  <div id="google_translate_element" style="text-align: right; margin-bottom: 20px;"></div>
+  <h1 id="exam-title">Loading...</h1>
 
-    <a href="class10.html" class="back-link">← Back to Class 10 Jobs</a>
+  <section>
+    <div class="info-box" id="why-box"></div>
+  </section>
 
-    <!-- Google Translate -->
-    <div id="google_translate_element" style="text-align: right; margin-bottom: 20px;"></div>
-    <p style="font-size: 0.9rem; color: #555;">📢 Change the language above to read in Assamese or Hindi</p>
+  <section>
+    <h2>🔍 About the Exam</h2>
+    <ul id="about-list"></ul>
+  </section>
 
-    <h1 id="exam-title">Loading...</h1>
-    <p id="exam-subtitle"></p>
+  <section>
+    <h2>🎓 Who Can Apply?</h2>
+    <ul id="eligibility-list"></ul>
+  </section>
 
-    <div class="info-box" id="exam-why"></div>
+  <section>
+    <h2>💼 Job Roles</h2>
+    <ul id="roles-list"></ul>
+  </section>
 
-    <section>
-      <h2>🔍 About</h2>
-      <div id="exam-about"></div>
-    </section>
+  <section>
+    <h2>📝 Exam Pattern</h2>
+    <ul id="pattern-list"></ul>
+  </section>
 
-    <section>
-      <h2>🎓 Who Can Apply?</h2>
-      <div id="exam-eligibility"></div>
-    </section>
+  <section>
+    <h2>📅 Important Dates</h2>
+    <table id="dates-table">
+      <thead><tr><th>Event</th><th>Date</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </section>
 
-    <section>
-      <h2>💼 Job Roles</h2>
-      <div id="exam-roles"></div>
-    </section>
+  <section>
+    <h2>💡 Tips</h2>
+    <ul id="tips-list"></ul>
+  </section>
 
-    <section>
-      <h2>📝 Exam Pattern</h2>
-      <div id="exam-pattern"></div>
-    </section>
+  <section>
+    <div class="warning-box" id="warning-box" style="display:none;"></div>
+  </section>
 
-    <section>
-      <h2>📅 Important Dates</h2>
-      <div id="exam-dates"></div>
-    </section>
+  <section>
+    <h2>🔗 Resources</h2>
+    <ul>
+      <li>📄 <a id="pdf-link" href="#" target="_blank" rel="noopener noreferrer">Notification / Syllabus</a></li>
+      <li>📄 <a id="pyq-link" href="#" target="_blank" rel="noopener noreferrer">Previous Year Papers</a></li>
+    </ul>
+  </section>
 
-    <section>
-      <h2>💡 Tips to Crack the Exam</h2>
-      <div id="exam-tips"></div>
-    </section>
+  <section>
+    <h2>📺 YouTube Study Links</h2>
+    <ul id="youtube-list"></ul>
+  </section>
 
-    <div class="warning-box" id="exam-warnings"></div>
+  <section>
+    <h2>🌐 Official Website</h2>
+    <p><a id="official-site" href="#" target="_blank" rel="noopener noreferrer">Visit Official Website</a></p>
+  </section>
 
-    <section>
-      <h2>🔗 Free Study Resources</h2>
-      <p>📄 <a id="pdf-link" href="#" target="_blank" rel="noopener noreferrer">Notification / Syllabus</a></p>
-      <p>📄 <a id="pyq-link" href="#" target="_blank" rel="noopener noreferrer">Previous Year Papers</a></p>
-      <div id="youtube-links"></div>
-    </section>
+  <section>
+    <h2>📝 How to Apply</h2>
+    <a id="apply-link" href="#" class="cta-button" target="_blank" rel="noopener noreferrer">Apply Online</a>
+  </section>
 
-    <section>
-      <h2>🌐 Official Website</h2>
-      <p><a id="official-site" href="#" target="_blank" rel="noopener noreferrer">Visit Official Website</a></p>
-    </section>
-
-    <section>
-      <h2>📝 How to Apply</h2>
-      <p><a id="apply-link" href="#" class="cta-button" target="_blank" rel="noopener noreferrer">Apply Online</a></p>
-    </section>
-
-    <p id="rural-tip"></p>
-
-    <footer>
-      <p>© 2025 Naukri Saathi | All resources are free & official</p>
-    </footer>
-  </div>
+  <footer style="text-align:center; margin-top:30px; font-size: 0.9rem; color:#555;">
+    © 2025 Naukri Saathi | All resources are free & official
+  </footer>
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRVh2Dak5NekD_LAZjqbR4QRqkBmqrY0Jxm3E8Svle-6yhjebjbSWJGVZ1AAKIKuJVKL09XnoZxUlFj/pub?output=tsv";
+      const sheetUrl = "YOUR_PUBLISHED_SHEET_TSV_URL_HERE";
 
       function getExamIdFromUrl() {
         const params = new URLSearchParams(window.location.search);
         return params.get("id") || "";
-      }
-
-      function parseListToUL(text) {
-        if (!text) return "";
-        let items = text.split("|").map(i => i.trim()).filter(Boolean);
-        return `<ul>${items.map(i => `<li>${i}</li>`).join("")}</ul>`;
-      }
-
-      function parseDatesToTable(text) {
-        if (!text) return "";
-        let rows = text.split("|").map(row => {
-          let [event, date] = row.split(":").map(s => s.trim());
-          return `<tr><td>${event}</td><td>${date}</td></tr>`;
-        }).filter(Boolean);
-        return `<table><thead><tr><th>Event</th><th>Date</th></tr></thead><tbody>${rows.join("")}</tbody></table>`;
       }
 
       fetch(sheetUrl)
@@ -205,12 +166,8 @@
           let exams = rows.slice(1);
 
           let examId = getExamIdFromUrl();
-          if (!examId) {
-            document.getElementById("exam-title").textContent = "No exam ID provided.";
-            return;
-          }
-
           let exam = exams.find(r => r[0] === examId);
+
           if (!exam) {
             document.getElementById("exam-title").textContent = "Exam Not Found";
             return;
@@ -220,41 +177,78 @@
           headers.forEach((h, i) => data[h] = exam[i] || "");
 
           document.getElementById("exam-title").textContent = data.title;
-          document.getElementById("exam-subtitle").textContent = data.subtitle;
 
-          document.getElementById("exam-why").innerHTML = parseListToUL(data.why);
-          document.getElementById("exam-about").innerHTML = data.about || "";
-          document.getElementById("exam-eligibility").innerHTML = parseListToUL(data.eligibility);
-          document.getElementById("exam-roles").innerHTML = parseListToUL(data.roles);
-          document.getElementById("exam-pattern").innerHTML = parseListToUL(data.pattern);
-          document.getElementById("exam-dates").innerHTML = parseDatesToTable(data.dates);
-          document.getElementById("exam-tips").innerHTML = parseListToUL(data.tips);
-          document.getElementById("exam-warnings").innerHTML = parseListToUL(data.warnings);
-
-          document.getElementById("pdf-link").href = data.pdf_link || "#";
-          document.getElementById("pyq-link").href = data.pyq_link || "#";
-
-          // YouTube links rendering
-          if (data.youtube) {
-            let parts = data.youtube.split("|");
-            let ytHTML = "";
-            for (let i = 0; i < parts.length; i += 3) {
-              let label = parts[i];
-              let desc = parts[i+1];
-              let url = parts[i+2];
-              if(label && url){
-                ytHTML += `<p><strong>${label}</strong>: <a href="${url}" target="_blank" rel="noopener noreferrer">${desc || url}</a></p>`;
-              }
-            }
-            document.getElementById("youtube-links").innerHTML = ytHTML;
+          // Render info box for why_points
+          if (data.why_points) {
+            const whyHtml = data.why_points.split("|").map(p => `✔ ${p.trim()}`).join("<br>");
+            document.getElementById("why-box").innerHTML = `<strong>Why this job is good for you:</strong><br>${whyHtml}`;
           }
 
-          document.getElementById("official-site").href = data.website || "#";
-          document.getElementById("apply-link").href = data.apply_link || "#";
-          document.getElementById("rural-tip").textContent = data.rural_tip || "";
+          // Utility to fill UL
+          function fillList(id, text) {
+            const ul = document.getElementById(id);
+            ul.innerHTML = "";
+            if(text){
+              text.split("|").forEach(item => {
+                const li = document.createElement("li");
+                li.textContent = item.trim();
+                ul.appendChild(li);
+              });
+            }
+          }
 
-          // Update page title
-          document.title = data.title + " - Naukri Saathi";
+          fillList("about-list", data.about_points);
+          fillList("eligibility-list", data.eligibility_list);
+          fillList("roles-list", data.roles_list);
+          fillList("pattern-list", data.pattern_list);
+          fillList("tips-list", data.tips_list);
+
+          // Dates table
+          const datesTbody = document.querySelector("#dates-table tbody");
+          datesTbody.innerHTML = "";
+          if (data.dates_table) {
+            data.dates_table.split("|").forEach(row => {
+              const [event, date] = row.split(":");
+              if(event && date){
+                const tr = document.createElement("tr");
+                tr.innerHTML = `<td>${event.trim()}</td><td>${date.trim()}</td>`;
+                datesTbody.appendChild(tr);
+              }
+            });
+          }
+
+          // Warnings
+          const warningBox = document.getElementById("warning-box");
+          if(data.warnings_list){
+            const warningsHtml = data.warnings_list.split("|").map(w => `❌ ${w.trim()}`).join("<br>");
+            warningBox.style.display = "block";
+            warningBox.innerHTML = `<strong>Common mistakes to avoid:</strong><br>${warningsHtml}`;
+          } else {
+            warningBox.style.display = "none";
+          }
+
+          // Links
+          document.getElementById("pdf-link").href = data.pdf_link || "#";
+          document.getElementById("pyq-link").href = data.pyq_link || "#";
+          document.getElementById("official-site").href = data.official_website || "#";
+          document.getElementById("apply-link").href = data.apply_link || "#";
+
+          // YouTube list
+          const ytList = document.getElementById("youtube-list");
+          ytList.innerHTML = "";
+          if(data.youtube_list){
+            const ytArr = data.youtube_list.split("|");
+            for(let i=0; i<ytArr.length; i+=2){
+              const title = ytArr[i].trim();
+              const url = ytArr[i+1] ? ytArr[i+1].trim() : null;
+              if(title && url){
+                const li = document.createElement("li");
+                li.innerHTML = `📺 <a href="${url}" target="_blank" rel="noopener noreferrer">${title}</a>`;
+                ytList.appendChild(li);
+              }
+            }
+          }
+
         })
         .catch(err => {
           console.error("Error loading exam data:", err);
