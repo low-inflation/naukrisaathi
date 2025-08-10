@@ -4,147 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title id="examTitle">Exam Details - Naukri Saathi</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #fdf6e3;
-      color: #333;
-      padding: 1rem;
-      max-width: 850px;
-      margin: auto;
-    }
-    h1, h2, h3 {
-      color: #2c3e50;
-      margin-top: 1rem;
-    }
-    a {
-      color: #007bff;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    .back-link {
-      margin: 1rem 0;
-      display: inline-block;
-    }
-    .info-box, .warning-box {
-      padding: 1rem;
-      margin: 1rem 0;
-      border-left: 6px solid;
-      border-radius: 5px;
-    }
-    .info-box {
-      background: #e8f5e9;
-      border-color: #4caf50;
-    }
-    .warning-box {
-      background: #fff3cd;
-      border-color: #ff9800;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1rem 0;
-    }
-    table, th, td {
-      border: 1px solid #bbb;
-    }
-    th, td {
-      padding: 8px;
-      text-align: left;
-    }
-    ul {
-      padding-left: 1.2rem;
-    }
-    .cta-button {
-      background: #4caf50;
-      color: white;
-      padding: 0.6rem 1rem;
-      margin-top: 1rem;
-      border-radius: 5px;
-      text-decoration: none;
-      font-weight: bold;
-      display: inline-block;
-    }
-    .cta-button:hover {
-      background: #45a049;
-    }
-  </style>
+  <!-- Add your styles and CSS links here -->
 </head>
 <body>
-  <a href="class10.html" class="back-link">← Back to Class 10 Jobs</a>
-  <div id="google_translate_element" style="text-align: right; margin-bottom: 20px;"></div>
   <h1 id="exam-title">Loading...</h1>
-
-  <section>
-    <div class="info-box" id="why-box"></div>
-  </section>
-
-  <section>
-    <h2>🔍 About the Exam</h2>
-    <ul id="about-list"></ul>
-  </section>
-
-  <section>
-    <h2>🎓 Who Can Apply?</h2>
-    <ul id="eligibility-list"></ul>
-  </section>
-
-  <section>
-    <h2>💼 Job Roles</h2>
-    <ul id="roles-list"></ul>
-  </section>
-
-  <section>
-    <h2>📝 Exam Pattern</h2>
-    <ul id="pattern-list"></ul>
-  </section>
-
-  <section>
-    <h2>📅 Important Dates</h2>
-    <table id="dates-table">
-      <thead><tr><th>Event</th><th>Date</th></tr></thead>
-      <tbody></tbody>
-    </table>
-  </section>
-
-  <section>
-    <h2>💡 Tips</h2>
-    <ul id="tips-list"></ul>
-  </section>
-
-  <section>
-    <div class="warning-box" id="warning-box" style="display:none;"></div>
-  </section>
-
-  <section>
-    <h2>🔗 Resources</h2>
-    <ul>
-      <li>📄 <a id="pdf-link" href="#" target="_blank" rel="noopener noreferrer">Notification / Syllabus</a></li>
-      <li>📄 <a id="pyq-link" href="#" target="_blank" rel="noopener noreferrer">Previous Year Papers</a></li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>📺 YouTube Study Links</h2>
-    <ul id="youtube-list"></ul>
-  </section>
-
-  <section>
-    <h2>🌐 Official Website</h2>
-    <p><a id="official-site" href="#" target="_blank" rel="noopener noreferrer">Visit Official Website</a></p>
-  </section>
-
-  <section>
-    <h2>📝 How to Apply</h2>
-    <a id="apply-link" href="#" class="cta-button" target="_blank" rel="noopener noreferrer">Apply Online</a>
-  </section>
-
-  <footer style="text-align:center; margin-top:30px; font-size: 0.9rem; color:#555;">
-    © 2025 Naukri Saathi | All resources are free & official
-  </footer>
+  <div class="info-box" id="why-box"></div>
+  <h2>🔍 About the Exam</h2><ul id="about-list"></ul>
+  <h2>🎓 Who Can Apply?</h2><ul id="eligibility-list"></ul>
+  <h2>💼 Job Roles</h2><ul id="roles-list"></ul>
+  <h2>📝 Exam Pattern</h2><ul id="pattern-list"></ul>
+  <h2>📅 Important Dates</h2>
+  <table id="dates-table"><thead><tr><th>Event</th><th>Date</th></tr></thead><tbody></tbody></table>
+  <h2>💡 Tips</h2><ul id="tips-list"></ul>
+  <div class="warning-box" id="warning-box" style="display:none;"></div>
+  <h2>🔗 Resources</h2>
+  <ul>
+    <li><a id="pdf-link" href="#" target="_blank">Notification / Syllabus</a></li>
+    <li><a id="pyq-link" href="#" target="_blank">Previous Year Papers</a></li>
+  </ul>
+  <h2>📺 YouTube Study Links</h2><ul id="youtube-list"></ul>
+  <h2>🌐 Official Website</h2><p><a id="official-site" href="#" target="_blank">Visit Official Website</a></p>
+  <h2>📝 How to Apply</h2><a id="apply-link" href="#" target="_blank">Apply Online</a>
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -155,118 +35,102 @@
         return params.get("id") || "";
       }
 
+      function splitList(text) {
+        if (!text) return [];
+        return text.split("|").map(item => item.trim()).filter(item => item);
+      }
+
       fetch(sheetUrl)
-        .then(res => {
-          if (!res.ok) throw new Error("Network response was not ok");
-          return res.text();
-        })
+        .then(res => res.text())
         .then(text => {
-          let rows = text.trim().split("\n").map(r => r.split("\t"));
-          let headers = rows[0];
-          let exams = rows.slice(1);
+          const rows = text.trim().split("\n").map(r => r.split("\t"));
+          const headers = rows[0].map(h => h.trim().toLowerCase());
+          const dataRows = rows.slice(1);
 
-          let examId = getExamIdFromUrl();
-          let exam = exams.find(r => r[0] === examId);
+          const examId = getExamIdFromUrl();
+          const examRow = dataRows.find(r => r[0].trim() === examId);
 
-          if (!exam) {
+          if (!examRow) {
             document.getElementById("exam-title").textContent = "Exam Not Found";
             return;
           }
 
-          let data = {};
-          headers.forEach((h, i) => data[h] = exam[i] || "");
+          const examData = {};
+          headers.forEach((header, i) => {
+            examData[header] = (examRow[i] || "").trim();
+          });
 
-          document.getElementById("exam-title").textContent = data.title;
+          document.getElementById("exam-title").textContent = examData.title || "No Title";
 
-          // Render info box for why_points
-          if (data.why_points) {
-            const whyHtml = data.why_points.split("|").map(p => `✔ ${p.trim()}`).join("<br>");
-            document.getElementById("why-box").innerHTML = `<strong>Why this job is good for you:</strong><br>${whyHtml}`;
+          // Why Points
+          const whyBox = document.getElementById("why-box");
+          whyBox.innerHTML = "";
+          if (examData.why_points) {
+            whyBox.innerHTML = `<strong>Why this job is good for you:</strong><br>` +
+              splitList(examData.why_points).map(p => `✔ ${p}`).join("<br>");
           }
 
-          // Utility to fill UL
-          function fillList(id, text) {
-            const ul = document.getElementById(id);
+          // Lists
+          const listFields = {
+            "about-list": "about_points",
+            "eligibility-list": "eligibility_list",
+            "roles-list": "roles_list",
+            "pattern-list": "pattern_list",
+            "tips-list": "tips_list"
+          };
+          for (const [elId, field] of Object.entries(listFields)) {
+            const ul = document.getElementById(elId);
             ul.innerHTML = "";
-            if(text){
-              text.split("|").forEach(item => {
-                const li = document.createElement("li");
-                li.textContent = item.trim();
-                ul.appendChild(li);
-              });
-            }
-          }
-
-          fillList("about-list", data.about_points);
-          fillList("eligibility-list", data.eligibility_list);
-          fillList("roles-list", data.roles_list);
-          fillList("pattern-list", data.pattern_list);
-          fillList("tips-list", data.tips_list);
-
-          // Dates table
-          const datesTbody = document.querySelector("#dates-table tbody");
-          datesTbody.innerHTML = "";
-          if (data.dates_table) {
-            data.dates_table.split("|").forEach(row => {
-              const [event, date] = row.split(":");
-              if(event && date){
-                const tr = document.createElement("tr");
-                tr.innerHTML = `<td>${event.trim()}</td><td>${date.trim()}</td>`;
-                datesTbody.appendChild(tr);
-              }
+            splitList(examData[field]).forEach(item => {
+              const li = document.createElement("li");
+              li.textContent = item;
+              ul.appendChild(li);
             });
           }
 
+          // Dates Table
+          const datesTbody = document.querySelector("#dates-table tbody");
+          datesTbody.innerHTML = "";
+          splitList(examData.dates_table).forEach(row => {
+            const [event, date] = row.split(":").map(s => s.trim());
+            if (event && date) {
+              const tr = document.createElement("tr");
+              tr.innerHTML = `<td>${event}</td><td>${date}</td>`;
+              datesTbody.appendChild(tr);
+            }
+          });
+
           // Warnings
           const warningBox = document.getElementById("warning-box");
-          if(data.warnings_list){
-            const warningsHtml = data.warnings_list.split("|").map(w => `❌ ${w.trim()}`).join("<br>");
+          if (examData.warnings_list) {
             warningBox.style.display = "block";
-            warningBox.innerHTML = `<strong>Common mistakes to avoid:</strong><br>${warningsHtml}`;
-          } else {
-            warningBox.style.display = "none";
+            warningBox.innerHTML = `<strong>Common mistakes to avoid:</strong><br>` +
+              splitList(examData.warnings_list).map(w => `❌ ${w}`).join("<br>");
           }
 
           // Links
-          document.getElementById("pdf-link").href = data.pdf_link || "#";
-          document.getElementById("pyq-link").href = data.pyq_link || "#";
-          document.getElementById("official-site").href = data.official_website || "#";
-          document.getElementById("apply-link").href = data.apply_link || "#";
+          document.getElementById("pdf-link").href = examData.pdf_link || "#";
+          document.getElementById("pyq-link").href = examData.pyq_link || "#";
+          document.getElementById("official-site").href = examData.official_website || "#";
+          document.getElementById("apply-link").href = examData.apply_link || "#";
 
-          // YouTube list
+          // YouTube Links
           const ytList = document.getElementById("youtube-list");
           ytList.innerHTML = "";
-          if(data.youtube_list){
-            const ytArr = data.youtube_list.split("|");
-            for(let i=0; i<ytArr.length; i+=2){
-              const title = ytArr[i].trim();
-              const url = ytArr[i+1] ? ytArr[i+1].trim() : null;
-              if(title && url){
-                const li = document.createElement("li");
-                li.innerHTML = `📺 <a href="${url}" target="_blank" rel="noopener noreferrer">${title}</a>`;
-                ytList.appendChild(li);
-              }
-            }
+          const ytItems = splitList(examData.youtube_list);
+          for (let i = 0; i < ytItems.length; i += 2) {
+            const title = ytItems[i] || `Video ${i / 2 + 1}`;
+            const url = ytItems[i + 1] || "#";
+            const li = document.createElement("li");
+            li.innerHTML = `📺 <a href="${url}" target="_blank" rel="noopener noreferrer">${title}</a>`;
+            ytList.appendChild(li);
           }
-
         })
         .catch(err => {
           console.error("Error loading exam data:", err);
           document.getElementById("exam-title").textContent = "Failed to load exam data.";
         });
     });
-
-
-  <!-- Google Translate -->
-  <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'en',
-        includedLanguages: 'as,hi',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-      }, 'google_translate_element');
-    }
   </script>
-  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
