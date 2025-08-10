@@ -256,6 +256,30 @@
         });
     });
   </script>
+fetch(sheetUrl)
+  .then(res => res.text())
+  .then(text => {
+    console.log("Raw TSV data:", text);
+    let rows = text.trim().split("\n").map(r => r.split("\t"));
+    let headers = rows[0];
+    console.log("Headers:", headers);
+    let exams = rows.slice(1);
+    console.log("Number of exams loaded:", exams.length);
+
+    let examId = getExamIdFromUrl();
+    console.log("Exam ID from URL:", examId);
+
+    let exam = exams.find(r => r[0] === examId);
+    if (!exam) {
+      console.warn("No exam found for ID:", examId);
+      document.querySelector("#exam-title").textContent = "Exam Not Found";
+      return;
+    }
+    // ...rest of code
+  })
+  .catch(err => {
+    console.error("Error loading exam data:", err);
+  });
 
   <!-- Google Translate -->
   <script type="text/javascript">
