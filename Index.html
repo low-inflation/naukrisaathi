@@ -124,13 +124,15 @@
     <p>© 2025 Naukri Saathi | Visits: <span id="visitorCount">0</span></p>
   </footer>
 
-  <!-- Visitor Counter -->
-  <script src="https://api.countapi.xyz/hit/naukri-saathi/visits?callback=cb"></script>
-  <script>
-    function cb(response) {
-      document.getElementById('visitorCount').innerText = response.value;
-    }
-  </script>
+<!-- Visitor Counter -->
+<script>
+fetch('https://api.countapi.xyz/hit/naukri-saathi/visits')
+  .then(res => res.json())
+  .then(res => {
+    document.getElementById('visitorCount').innerText = res.value;
+  });
+</script>
+
 
   <!-- Google Translate -->
   <script type="text/javascript">
@@ -143,14 +145,9 @@
     }
   </script>
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-<script>
-fetch('https://api.countapi.xyz/hit/naukri-saathi/landingpage')
-  .then(res => res.json())
-  .then(res => {
-    document.getElementById('visits').innerText = res.value;
-  });
-</script>
+
 
 </body>
 </html>
+
 
