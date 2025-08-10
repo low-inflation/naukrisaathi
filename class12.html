@@ -3,153 +3,310 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Class 10 Govt Jobs - Naukri Saathi</title>
+  <title>Class 12 Govt Jobs - Naukri Saathi</title>
   <link rel="stylesheet" href="style.css" />
   <style>
+    /* Base layout */
     body {
       font-family: Arial, sans-serif;
       background-color: #faf7f0;
       line-height: 1.6;
+      margin: 0;
+      color: #222;
     }
+    .container {
+      max-width: 980px;
+      margin: auto;
+      padding: 1rem;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(90deg,#0b6e54,#25a78a);
+      color: #fff;
+      padding: 18px 0;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.6rem;
+    }
+    header p {
+      margin: 6px 0 0 0;
+      font-size: 0.95rem;
+      opacity: 0.95;
+    }
+    .back-home {
+      display: inline-block;
+      margin-top: 10px;
+      background: rgba(255,255,255,0.12);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* Search + Translate */
+    .top-bar {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      margin: 12px 0;
+      flex-wrap: wrap;
+    }
+    .translate-box {
+      margin-left: auto;
+    }
+    .search-bar {
+      flex: 1 1 360px;
+      text-align: left;
+    }
+    .search-bar input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 28px;
+      border: 1px solid #d7d7d7;
+      font-size: 1rem;
+    }
+
+    /* Job list / cards */
+    h2 { color: #0b6e54; margin-top: 1.2rem; }
+    ul.job-summary {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+    ul.job-summary li {
+      margin-bottom: 0.9rem;
+    }
+    ul.job-summary li a {
+      display: block;
+      padding: 14px;
+      border-radius: 12px;
+      background: #fff;
+      text-decoration: none;
+      color: #222;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+    ul.job-summary li a:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+      background: #f8fffb;
+    }
+    ul.job-summary li a strong {
+      color: #0066cc;
+      font-size: 1.05rem;
+      display:block;
+      margin-bottom: 6px;
+    }
+    ul.job-summary li a span.meta {
+      color: #555;
+      font-size: 0.95rem;
+      display:block;
+      margin-top: 6px;
+    }
+
+    /* Tables */
     table {
       width: 100%;
       border-collapse: collapse;
-      margin: 1rem 0;
-    }
-    th, td {
-      border: 1px solid #000;
-      padding: 8px;
-      text-align: left;
-    }
-    th {
-      background-color: #f2f2f2;
-    }
-    tr:nth-child(even) {
-      background-color: #f9f9f9;
-    }
-    ul.job-summary {
-      list-style-type: none;
-      padding-left: 0;
-    }
-    ul.job-summary li {
-      margin-bottom: 0.8rem;
+      margin: 0.7rem 0 1.2rem 0;
       background: #fff;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+    }
+    thead th {
+      background: #0b6e54;
+      color: #fff;
       padding: 10px;
-      border-radius: 5px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      text-align: left;
+      font-weight: 600;
     }
-    h3, h4 {
-      margin-top: 2rem;
-      color: #2a4d69;
+    tbody td {
+      padding: 10px;
+      border-top: 1px solid #eee;
     }
-    .search-bar {
-      margin: 20px 0;
+
+    /* Info boxes */
+    .note {
+      background: #e8f6f0;
+      border-left: 6px solid #25a78a;
+      padding: 12px;
+      border-radius: 6px;
+      margin-bottom: 12px;
+    }
+
+    /* Footer */
+    footer {
+      background: #f1f1f1;
       text-align: center;
+      padding: 12px;
+      margin-top: 20px;
+      color: #555;
     }
-    .search-bar input {
-      padding: 8px;
-      width: 80%;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+
+    /* Responsive */
+    @media (max-width: 700px) {
+      header h1 { font-size: 1.3rem; }
+      .search-bar { flex-basis: 100%; }
+      .top-bar { gap: 10px; }
+      ul.job-summary li a { padding: 12px; }
     }
-    li a {
-  display: block;
-  padding: 15px;
-  border-radius: 10px;
-  background: #ffffff;
-  text-decoration: none;
-  color: #222;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  transition: all 0.2s ease-in-out;
-}
-
-li a:hover {
-  background: #f8f9fa;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-li strong {
-  color: #0066cc;
-}
-
   </style>
 </head>
 <body>
-
   <header>
-    <div id="google_translate_element" style="text-align: right; margin: 20px;"></div>
     <div class="container">
-      <h1>📘 Class 10 Government Jobs</h1>
-      <p>Explore Sarkari Naukri options after Class 10 with free resources, videos, PDFs and tips</p>
-      <a href="index.html" class="cta-button">← Back to Home</a>
+      <h1>📘 Government Jobs after Class 12</h1>
+      <p>Your guide for HS-level (Class 12) government job options — links, tips, important dates</p>
+      <a class="back-home" href="index.html">← Back to Home</a>
     </div>
   </header>
 
-  <!-- Search Bar -->
-  <div class="search-bar">
-    <input type="text" id="searchInput" placeholder="Search exams..." onkeyup="searchJobs()">
-  </div>
+  <div class="container">
+    <div class="top-bar">
+      <div class="search-bar">
+        <input id="searchInput" type="text" placeholder="Search exams (example: 'SSC CHSL', 'NDA')..." onkeyup="searchJobs()">
+      </div>
+      <div id="google_translate_element" class="translate-box"></div>
+    </div>
 
-  <main class="container">
     <section>
-      <h2>📚 Key Exams After Class 10</h2>
-      <p>After you pass Class 10 (Matriculation), there are many government exams you can try for. These exams help you get good jobs in the central government or your state.</p>
+      <div class="note">
+        <strong>Note:</strong> This page lists only jobs where <em>Class 12</em> is the minimum eligibility. If you have Class 12, you are also eligible for many Class 10-level jobs (see Class 10 page).
+      </div>
 
-      <h3>🏛️ Central Level Exams (All India)</h3>
+      <h2>🏛️ Central Level Exams (All India)</h2>
       <ul class="job-summary" id="examList">
-        <li><a href="exam-template.html?id=ssc-mts">1. SSC MTS & Havaldar</strong><br>➡️ Office helper jobs & Havaldar posts in central govt departments.<br>✅ Class 10 pass<br>🌍 All India<br>💰 ₹23,000–₹25,000/month</a></li>
-        <li><a href="exam-template.html?id=ssc-gd">2. SSC GD Constable</strong><br>➡️ Join BSF, CRPF, CISF, ITBP, SSB, or SSF.<br>✅ Class 10 pass<br>💪 Physical test needed<br>💰 ₹30,000–₹32,000/month</a></li>
-        <li><a href="exam-template.html?id=rrb-group-d">3. RRB Group D</strong><br>➡️ Railway jobs like helper, track maintainer, porter.<br>✅ Class 10 pass<br>🚆 Railway lovers<br>💰 ₹22,000–₹25,000/month</a></li>
-        <li><a href="exam-template.html?id=gds">4. Indian Post GDS</strong><br>➡️ Post office jobs in villages/towns.<br>✅ Class 10 pass with good marks in Maths & English<br>📬 No exam<br>💰 ₹10,000–₹14,500/month</a></li>
-        <li><a href="exam-template.html?id=army-agniveer">5. Army Agniveer</strong><br>➡️ Soldier GD & Tradesman roles.<br>✅ Class 10 pass<br>📋 Physical + written test<br>💰 ₹30,000–₹40,000/month</a></li>
-        <li><a href="exam-template.html?id=navy-agniveer">6. Navy Agniveer (MR)</strong><br>➡️ Matric Recruit posts like cook, steward.<br>✅ Class 10 pass<br>🚢 Physical + written test<br>💰 ₹30,000–₹40,000/month</a></li>
-        <li><a href="exam-template.html?id=airforce-agniveer">7. Air Force Agniveer Vayu</strong><br>➡️ Trades/support roles.<br>✅ Class 10 pass<br>✈️ Physical + written test<br>💰 ₹30,000–₹40,000/month</a></li>
+        <li>
+          <a href="exam-template.html?id=ssc-chsl">
+            <strong>1. SSC CHSL (Combined Higher Secondary Level)</strong>
+            <span class="meta">➡️ LDC, DEO, Postal Assistant, Court Clerk. ✅ Class 12 pass • 🌍 All India • 💰 ₹25,000–₹40,000/month</span>
+          </a>
+        </li>
+        <li>
+          <a href="exam-template.html?id=ssc-steno">
+            <strong>2. SSC Stenographer (Grade C & D)</strong>
+            <span class="meta">➡️ Stenography & clerical roles. ✅ Class 12 pass + stenography skill • 🌍 All India • 💰 ₹30,000–₹45,000/month</span>
+          </a>
+        </li>
+        <li>
+          <a href="exam-template.html?id=nda">
+            <strong>3. NDA (National Defence Academy) / NA (Naval Academy)</strong>
+            <span class="meta">➡️ Officer entry after training. ✅ Class 12 pass (PCM for Navy/Air Force) • 🌍 All India • 💰 Training stipend + allowances</span>
+          </a>
+        </li>
+        <li>
+          <a href="exam-template.html?id=army-agniveer-technical">
+            <strong>4. Indian Army Agniveer (Technical & Clerk/SKT)</strong>
+            <span class="meta">➡️ Agniveer Technical (Class 12 Science required) and Clerk/SKT (Class 12 any stream). ✅ Class 12 pass • 🌍 All India • 💰 Allowances + post-service opportunities</span>
+          </a>
+        </li>
+        <li>
+          <a href="exam-template.html?id=airforce-agniveer">
+            <strong>5. Indian Air Force Agniveer Vayu</strong>
+            <span class="meta">➡️ Technical & non-technical trades for HS pass candidates. ✅ Class 12 pass (stream as specified) • 🌍 All India</span>
+          </a>
+        </li>
+        <li>
+          <a href="exam-template.html?id=navy-agniveer-ssr">
+            <strong>6. Indian Navy Agniveer (SSR)</strong>
+            <span class="meta">➡️ Technical sailor trades. ✅ Class 12 pass (science required for some trades) • 🌍 All India</span>
+          </a>
+        </li>
+        <li>
+          <a href="exam-template.html?id=coastguard-navik">
+            <strong>7. Indian Coast Guard – Navik (General Duty)</strong>
+            <span class="meta">➡️ Sailor roles, maritime security. ✅ Class 12 pass (specified streams for some posts) • 🌍 All India</span>
+          </a>
+        </li>
+        <li>
+          <a href="exam-template.html?id=rrb-ntpc">
+            <strong>8. RRB NTPC (Level 2/3 posts e.g., Clerk, Typist, Ticket)</strong>
+            <span class="meta">➡️ Non-technical popular categories requiring HS for some posts. ✅ Class 12 pass for select positions • 🌍 All India</span>
+          </a>
+        </li>
+        <li>
+          <a href="exam-template.html?id=ib-security-assistant">
+            <strong>9. IB Security Assistant / UDC (where HS required)</strong>
+            <span class="meta">➡️ Intelligence Bureau clerical/support roles. ✅ Class 12 (for some posts) • 🌍 All India</span>
+          </a>
+        </li>
       </ul>
 
-      <br>
-
-      <h3>🌾 Assam State Level Exams</h3>
+      <h2>🌾 Assam State Level Exams</h2>
       <ul class="job-summary">
-        <li><a href="exam-template.html?id=assam-dr">8. Assam Direct Recruitment – Grade IV</strong><br>➡️ Peon, Chowkidar, Driver, etc.<br>✅ Class 8/10 pass<br>🏢 No special skill<br>💰 ₹17,000–₹20,000/month</a></li>
-        <li><a href="exam-template.html?id=assam-police">9. Assam Police Grade IV</strong><br>➡️ Peon, Chowkidar, Driver.<br>✅ Class 10 pass<br>🚓 Physical + written test<br>💰 ₹18,000–₹21,000/month</a></li>
-        <li><a href="exam-template.html?id=assam-forest">10. Assam Forest Guard / AFPF Constable</strong><br>➡️ Protect forests/wildlife.<br>✅ Class 10 pass<br>🌲 Physical + written test<br>💰 ₹22,000–₹25,000/month</a></li>
-        <li><a href="exam-template.html?id=excise-constable">11. Excise Constable</strong><br>➡️ Excise Dept jobs.<br>✅ Class 10 pass<br>🔍 Written + Physical test<br>💰 ₹22,000–₹25,000/month</a></li>
-        <li><a href="exam-template.html?id=home-guard">12. Home Guard Volunteer</strong><br>➡️ Assist police.<br>✅ Class 10 pass<br>🎽 Physical fitness test<br>💰 ₹9,000–₹11,000/month</a></li>
+        <li>
+          <a href="exam-template.html?id=assam-secretariat-jaa">
+            <strong>1. Assam Secretariat – Junior Administrative Assistant (JAA)</strong>
+            <span class="meta">➡️ Clerical & admin assistant work in state departments. ✅ Class 12 pass • 🏢 Assam-specific</span>
+          </a>
+        </li>
+        <li>
+          <a href="exam-template.html?id=assam-irrigation-ja">
+            <strong>2. Assam Irrigation Department – Junior Assistant</strong>
+            <span class="meta">➡️ Office clerical roles in irrigation & water resources. ✅ Class 12 pass • 🏢 Assam-specific</span>
+          </a>
+        </li>
+        <li>
+          <a href="exam-template.html?id=assam-forester-grade1">
+            <strong>3. Assam Forest – Forester / Forester Grade I</strong>
+            <span class="meta">➡️ Field & protection duties; some posts require Class 12 (science). ✅ Class 12 (science for some posts) • 🌲 Assam</span>
+          </a>
+        </li>
+        <li>
+          <a href="exam-template.html?id=assam-edu-hs-teacher">
+            <strong>4. Assam Education Dept. – HS Level Teacher (eligibility varies)</strong>
+            <span class="meta">➡️ Teaching roles at higher secondary level (requires HS + professional qualification as specified). ✅ Class 12 + required diploma/BT/CERT • 🏫 Assam</span>
+          </a>
+        </li>
+        <li>
+          <a href="exam-template.html?id=assam-electricity-hs">
+            <strong>5. APDCL / AEGCL – Junior Assistant / HS-level technical & clerical posts</strong>
+            <span class="meta">➡️ Office & technical support posts in power utilities. ✅ Class 12 pass • 🏭 Assam</span>
+          </a>
+        </li>
       </ul>
 
-      <br>
-
-      <h3>📅 When to Apply? (Class 10 Pass Jobs)</h3>
-      <p>These are usual timelines based on past years. They may change each year.</p>
-
-      <h4>🇮🇳 Central Government Jobs</h4>
+      <h2>📅 When to Apply (typical months)</h2>
+      <p style="margin-top:0.25rem; color:#444;">(These are typical timelines from previous years — confirm with official notifications each cycle.)</p>
       <table>
-        <thead><tr><th>Exam</th><th>Notification</th><th>Apply</th><th>Exam</th></tr></thead>
+        <thead>
+          <tr>
+            <th>Exam</th>
+            <th>Notification</th>
+            <th>Application Period</th>
+            <th>Exam</th>
+          </tr>
+        </thead>
         <tbody>
-          <tr><td>SSC MTS & Havaldar</td><td>June</td><td>June – July</td><td>Oct – Nov</td></tr>
-          <tr><td>SSC GD Constable</td><td>Nov – Dec</td><td>Dec – Jan</td><td>Feb – Mar</td></tr>
-          <tr><td>RRB Group D</td><td>Jan (not yearly)</td><td>Jan – Feb</td><td>Jun – Jul</td></tr>
-          <tr><td>India Post GDS</td><td>April & Sept</td><td>Same month</td><td>❌ No exam</td></tr>
-          <tr><td>Army Agniveer</td><td>Feb</td><td>Feb – Mar</td><td>May – Jun</td></tr>
-          <tr><td>Navy Agniveer (MR)</td><td>May & Nov</td><td>May/Nov</td><td>July / Jan</td></tr>
-          <tr><td>Air Force Agniveer Vayu</td><td>Jan & Jul</td><td>Same month</td><td>Mar & Sept</td></tr>
+          <tr><td>SSC CHSL</td><td>Apr–May</td><td>Apr–May</td><td>Jul–Aug</td></tr>
+          <tr><td>SSC Stenographer</td><td>Jul–Aug</td><td>Jul–Aug</td><td>Oct–Nov</td></tr>
+          <tr><td>NDA / NA</td><td>Jan / Jun</td><td>Jan / Jun</td><td>Apr / Sep</td></tr>
+          <tr><td>Army Agniveer (Technical/Clerk)</td><td>Feb–Mar</td><td>Feb–Mar</td><td>Apr–May</td></tr>
+          <tr><td>Air Force Agniveer</td><td>Jan / Jul</td><td>Jan / Jul</td><td>Mar / Sep</td></tr>
+          <tr><td>Navy Agniveer (SSR)</td><td>May / Nov</td><td>May / Nov</td><td>Jul / Jan</td></tr>
+          <tr><td>Coast Guard Navik</td><td>May / Sep</td><td>May / Sep</td><td>Jul / Nov</td></tr>
+          <tr><td>RRB NTPC (HS posts)</td><td>Jan–Feb (when announced)</td><td>Jan–Feb</td><td>May–Aug</td></tr>
+          <tr><td>Assam Secretariat JAA</td><td>May–Jun</td><td>May–Jun</td><td>Aug–Sep</td></tr>
+          <tr><td>APDCL / AEGCL Junior Assistant</td><td>Mar–Apr</td><td>Mar–Apr</td><td>Jun–Jul</td></tr>
         </tbody>
       </table>
 
-      <h4>🌾 Assam Government Jobs</h4>
-      <table>
-        <thead><tr><th>Exam</th><th>Notification</th><th>Apply</th><th>Exam</th></tr></thead>
-        <tbody>
-          <tr><td>Assam DR Grade IV</td><td>June – July</td><td>Same month</td><td>Sept – Oct</td></tr>
-          <tr><td>Assam Police Grade IV</td><td>Jan – Feb</td><td>30 days</td><td>May – Jun</td></tr>
-          <tr><td>Forest Guard / AFPF</td><td>Dec – Jan</td><td>Dec – Jan</td><td>Apr – May</td></tr>
-          <tr><td>Excise Constable</td><td>March</td><td>Mar – Apr</td><td>Jul – Aug</td></tr>
-          <tr><td>Home Guard Volunteer</td><td>By District</td><td>Local enrol</td><td>❌ No exam</td></tr>
-        </tbody>
-      </table>
+      <h2>💡 Quick Tips for Class 12 Candidates</h2>
+      <ul>
+        <li>Start fitness & basic medical checks if applying to armed forces (PFT/PMT require time).</li>
+        <li>Keep scanned documents, Class 12 mark sheet, and ID ready before application windows open.</li>
+        <li>Practice mock tests for reasoning, maths, and English for CHSL/NTPC.</li>
+        <li>Follow official websites and subscribe to alerts — do not rely on unofficial posts only.</li>
+      </ul>
+
     </section>
-  </main>
+  </div>
 
   <footer>
     <div class="container">
@@ -160,12 +317,14 @@ li strong {
   <!-- Search Script -->
   <script>
     function searchJobs() {
-      let input = document.getElementById("searchInput").value.toLowerCase();
-      let jobs = document.getElementById("examList").getElementsByTagName("li");
-      for (let i = 0; i < jobs.length; i++) {
-        let text = jobs[i].textContent.toLowerCase();
-        jobs[i].style.display = text.includes(input) ? "" : "none";
-      }
+      const input = document.getElementById("searchInput").value.toLowerCase().trim();
+      const list = document.getElementById("examList");
+      // find all li in both job lists (examList + the second ul there)
+      const lis = document.querySelectorAll('ul.job-summary li');
+      lis.forEach(li => {
+        const text = li.textContent.toLowerCase();
+        li.style.display = text.includes(input) ? "" : "none";
+      });
     }
   </script>
 
