@@ -7,11 +7,12 @@
 
 /* Typography & Base */
 body {
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   background-color: #f9fafb;
   color: #222;
   line-height: 1.6;
 }
+
 
 a {
   color: #2a71d0;
@@ -101,3 +102,4 @@ footer {
   font-size: 0.85rem;
   color: #555;
 }
+
