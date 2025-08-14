@@ -15,8 +15,12 @@ body {
 
 
 a {
-  color: #2a71d0;
+  color: #4CAF50;
   text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 /* Container */
@@ -158,6 +162,7 @@ th {
   font-weight: 600;
 }
 
+
 td {
   padding: 0.8rem;
   background: white;
@@ -203,6 +208,9 @@ ul li::before {
   left: 0;
   font-weight: bold;
 }
+
+
+
 
 
 
