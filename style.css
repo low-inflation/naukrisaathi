@@ -17,6 +17,7 @@ body {
 a {
   color: #4CAF50;
   text-decoration: none;
+  padding: 8px 12px;
 }
 
 a:hover {
@@ -25,9 +26,9 @@ a:hover {
 
 /* Container */
 .container {
-  max-width: 800px;
+  max-width: 90%;
   margin: auto;
-  padding: 20px;
+  padding: 20px 15px;
 }
 
 /* Header */
@@ -48,10 +49,10 @@ header p {
   font-size: 1rem;
 }
 
-.cta-button {
+.cta-button, .button-apply {
   display: inline-block;
   margin-top: 15px;
-  padding: 10px 20px;
+  padding: 12px 24px;
   background-color: #fff;
   color: #2a71d0;
   font-weight: bold;
@@ -208,6 +209,24 @@ ul li::before {
   left: 0;
   font-weight: bold;
 }
+@media (max-width: 600px) {
+  body {
+    font-size: 14px;
+  }
+
+  .container {
+    padding: 10px;
+  }
+
+  header {
+    padding: 20px 0;
+  }
+
+  .job-card {
+    padding: 15px;
+  }
+}
+
 
 
 
