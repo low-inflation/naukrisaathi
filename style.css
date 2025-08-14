@@ -122,3 +122,69 @@ header p {
   font-weight: 400;
 }
 
+/* Modern table look */
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+th {
+  background: #4CAF50;
+  color: white;
+  text-align: left;
+  padding: 0.8rem;
+  font-weight: 600;
+}
+
+td {
+  padding: 0.8rem;
+  background: white;
+}
+
+tr:nth-child(even) td {
+  background: #f8f9fa;
+}
+
+.info-box {
+  background: #e0f7fa;
+  border-left: 5px solid #00acc1;
+  padding: 1rem 1.2rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.warning-box {
+  background: #ffebee;
+  border-left: 5px solid #d32f2f;
+  padding: 1rem 1.2rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+ul li {
+  padding-left: 1.5rem;
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+ul li::before {
+  content: "✔";
+  color: #4CAF50;
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+
+
