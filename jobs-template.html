@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="pageTitle">Government Jobs - Naukri Saathi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Matches your Class 12 page look */
+    .container { max-width: 980px; margin: auto; padding: 1rem; }
+    .top-bar { display: flex; gap: 12px; flex-wrap: wrap; justify-content: space-between; }
+    .search-bar { flex: 1 1 360px; }
+    .search-bar input { width: 100%; padding: 10px 12px; border-radius: 28px; border: 1px solid #d7d7d7; font-size: 1rem; }
+    ul.job-summary { list-style: none; padding: 0; margin: 0; }
+    ul.job-summary li { margin-bottom: 0.9rem; }
+    ul.job-summary li a {
+      display: block; padding: 14px; border-radius: 12px; background: #fff;
+      text-decoration: none; color: #222; box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    ul.job-summary li a:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); background: #f8fffb; }
+    ul.job-summary li a strong { color: #0066cc; display: block; margin-bottom: 6px; }
+  </style>
+</head>
+<body>
+<header>
+  <h1 id="headerTitle">Government Jobs</h1>
+  <p>Your Friend in the Journey to a Government Job</p>
+</header>
+
+<div class="container">
+  <div class="top-bar">
+    <div class="search-bar">
+      <input id="searchInput" type="text" placeholder="Search exams..." onkeyup="searchJobs()">
+    </div>
+    <div id="google_translate_element"></div>
+  </div>
+
+  <section>
+    <ul class="job-summary" id="jobList"></ul>
+  </section>
+</div>
+
+<footer>
+  <div class="container">
+    <p>© 2025 Naukri Saathi | All resources are free & official</p>
+  </div>
+</footer>
+
+<script>
+  const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQdw4oizT9DebSJ0SoNwd0jwfpAo36M0Z-Z0mb5Keb6QwZvo4i8qntcR_gfeOHenAqPz8jeODNWOyeZ/pub?output=tsv";
+
+  function getCategoryFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    return (params.get("category") || "").toLowerCase();
+  }
+
+  function searchJobs() {
+    const input = document.getElementById("searchInput").value.toLowerCase().trim();
+    document.querySelectorAll("#jobList li").forEach(li => {
+      li.style.display = li.textContent.toLowerCase().includes(input) ? "" : "none";
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const category = getCategoryFromUrl();
+    const titles = { class10: "📚 Class 10 Government Jobs", class12: "📘 Class 12 Government Jobs", graduation: "🎓 Graduation Government Jobs" };
+    document.getElementById("headerTitle").textContent = titles[category] || "Government Jobs";
+    document.getElementById("pageTitle").textContent = titles[category] || "Government Jobs";
+
+    fetch(sheetUrl)
+      .then(res => res.text())
+      .then(text => {
+        const rows = text.trim().split("\n").map(r => r.split("\t"));
+        const headers = rows[0].map(h => h.trim().toLowerCase());
+        const dataRows = rows.slice(1);
+        const list = document.getElementById("jobList");
+        list.innerHTML = "";
+
+        dataRows.filter(r => r[0].trim().toLowerCase() === category).forEach(r => {
+          const job = {};
+          headers.forEach((h, i) => job[h] = r[i] || "");
+          const li = document.createElement("li");
+          li.innerHTML = `<a href="${job.link}"><strong>${job.title}</strong>${job.description}<br><span class="meta">${job.meta}</span></a>`;
+          list.appendChild(li);
+        });
+      })
+      .catch(err => console.error("Error loading jobs:", err));
+  });
+</script>
+
+<!-- Google Translate -->
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'as,hi',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+  }
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
