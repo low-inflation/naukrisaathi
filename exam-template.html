@@ -151,6 +151,11 @@
 
     <h2>📝 How to Apply</h2>
     <a id="apply-link" class="button-apply" href="#" target="_blank">Apply Online</a>
+
+    <div id="rural-tip-box" style="display:none; margin-top:20px; padding:15px; border-radius:10px; background:#fff8e1; border:1px solid #ffd54f; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+  <strong style="color:#ff6f00;">🌱 Rural Tip:</strong> <span id="rural-tip-text"></span>
+</div>
+
   </main>
 
   <footer>
@@ -178,18 +183,26 @@
           const headers = rows[0].map(h => h.trim().toLowerCase());
           const dataRows = rows.slice(1);
 
-          const examId = getExamIdFromUrl();
-          const examRow = dataRows.find(r => r[0].trim() === examId);
+// Get exam_id from URL
+const examId = getExamIdFromUrl();
 
-          if (!examRow) {
-            document.getElementById("exam-title").textContent = "Exam Not Found";
-            return;
-          }
+// Find the detail row
+const examRow = dataRows.find(r => {
+  const rowType = (r[0] || "").trim().toLowerCase(); // type
+  const rowExamId = (r[3] || "").trim(); // exam_id (4th column)
+  return rowType === "detail" && rowExamId === examId;
+});
 
-          const examData = {};
-          headers.forEach((header, i) => {
-            examData[header] = (examRow[i] || "").trim();
-          });
+if (!examRow) {
+  document.getElementById("exam-title").textContent = "Exam Not Found";
+  return;
+}
+
+const examData = {};
+headers.forEach((header, i) => {
+  examData[header] = (examRow[i] || "").trim();
+});
+
 
           document.getElementById("exam-title").textContent = examData.title || "No Title";
 
@@ -250,6 +263,13 @@
             li.innerHTML = `📺 <a href="${url}" target="_blank" rel="noopener noreferrer">${title}</a>`;
             ytList.appendChild(li);
           }
+
+          // Show Rural Tip if available
+if (examData.rural_tip) {
+  document.getElementById("rural-tip-text").textContent = examData.rural_tip;
+  document.getElementById("rural-tip-box").style.display = "block";
+}
+
         })
         .catch(err => {
           console.error("Error loading exam data:", err);
