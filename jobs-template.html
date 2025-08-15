@@ -80,13 +80,48 @@
         const list = document.getElementById("jobList");
         list.innerHTML = "";
 
-        dataRows.filter(r => r[0].trim().toLowerCase() === category).forEach(r => {
-          const job = {};
-          headers.forEach((h, i) => job[h] = r[i] || "");
-          const li = document.createElement("li");
-          li.innerHTML = `<a href="${job.link}"><strong>${job.title}</strong>${job.description}<br><span class="meta">${job.meta}</span></a>`;
-          list.appendChild(li);
-        });
+const stateList = [];
+const centralList = [];
+
+// Filter rows for this category
+dataRows.filter(r => r[0].trim().toLowerCase() === category).forEach(r => {
+  const job = {};
+  headers.forEach((h, i) => job[h] = r[i] || "");
+  const liHTML = `<li><a href="${job.link}">
+                    <strong>${job.title}</strong>${job.description}<br>
+                    <span class="meta">${job.meta}</span>
+                  </a></li>`;
+  if (job.section && job.section.trim().toLowerCase() === "state") {
+    stateList.push(liHTML);
+  } else {
+    centralList.push(liHTML);
+  }
+});
+
+// Output State section first
+const list = document.getElementById("jobList");
+list.innerHTML = "";
+
+if (stateList.length) {
+  const h2 = document.createElement("h2");
+  h2.textContent = "🌾 Assam State Govt Exams";
+  list.appendChild(h2);
+  const ul = document.createElement("ul");
+  ul.className = "job-summary";
+  ul.innerHTML = stateList.join("");
+  list.appendChild(ul);
+}
+
+if (centralList.length) {
+  const h2 = document.createElement("h2");
+  h2.textContent = "🏛️ Central Level Exams (All India)";
+  list.appendChild(h2);
+  const ul = document.createElement("ul");
+  ul.className = "job-summary";
+  ul.innerHTML = centralList.join("");
+  list.appendChild(ul);
+}
+
       })
       .catch(err => console.error("Error loading jobs:", err));
   });
