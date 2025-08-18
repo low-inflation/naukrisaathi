@@ -172,7 +172,7 @@
 
   function splitList(text) {
     if (!text) return [];
-    return text.split("|").map(i => i.trim()).filter(i => i);
+    return text.split("|").map(item => item.trim()).filter(item => item);
   }
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -182,26 +182,18 @@
       .then(res => res.text())
       .then(text => {
         const rows = text.trim().split("\n").map(r => r.split("\t"));
-        // 🔑 Normalize headers
-        const headers = rows[0].map(h =>
-          h.trim().toLowerCase().replace(/\s+/g, "_")
-        );
+        const headers = rows[0].map(h => h.trim().toLowerCase().replace(/\s+/g, "_"));
         const dataRows = rows.slice(1);
 
-        // 🔑 Build map for fast lookup
+        // Lookup map
         const examMap = new Map();
         dataRows.forEach(r => {
           const obj = {};
-          headers.forEach((h, i) => {
-            obj[h] = (r[i] || "").trim();
-          });
+          headers.forEach((h, i) => (obj[h] = (r[i] || "").trim()));
           if (obj.exam_id) examMap.set(obj.exam_id, obj);
         });
 
         const examData = examMap.get(examId);
-        console.log("Exam Data:", examData); // 🔍 Debug
-        console.log("Keys:", Object.keys(examData));
-
         if (!examData) {
           document.getElementById("exam-title").textContent = "Exam Not Found";
           return;
@@ -213,80 +205,79 @@
 
         // Why Box
         if (examData.why_points) {
-          document.getElementById("why-box").textContent = examData.why_points;
+          document.getElementById("why-box").innerHTML =
+            `<strong>Why this job is good for you:</strong><br>` +
+            splitList(examData.why_points).map(p => `✔ ${p}`).join("<br>");
         }
 
-        // About
-        document.getElementById("about-list").innerHTML =
-          splitList(examData.about_points).map(i => `<li>${i}</li>`).join("");
+        // Generic lists (About, Eligibility, Roles, Pattern, Tips)
+        const listFields = {
+          "about-list": "about_points",
+          "eligibility-list": "eligibility_list",
+          "roles-list": "roles_list",
+          "pattern-list": "pattern_list",
+          "tips-list": "tips_list"
+        };
+        for (const [elId, field] of Object.entries(listFields)) {
+          const ul = document.getElementById(elId);
+          const items = splitList(examData[field]);
+          if (items.length) {
+            ul.innerHTML = items.map(item => `<li>${item}</li>`).join("");
+          } else {
+            ul.parentElement.style.display = "none"; // hide section if empty
+          }
+        }
 
-        // Eligibility
-        document.getElementById("eligibility-list").innerHTML =
-          splitList(examData.eligibility_list).map(i => `<li>${i}</li>`).join("");
-
-        // Roles
-        document.getElementById("roles-list").innerHTML =
-          splitList(examData.roles_list).map(i => `<li>${i}</li>`).join("");
-
-        // Pattern
-        document.getElementById("pattern-list").innerHTML =
-          splitList(examData.pattern_list).map(i => `<li>${i}</li>`).join("");
-
-        // Dates (Event: Date format)
-        const datesBody = document.querySelector("#dates-table tbody");
+        // Dates
+        const datesTbody = document.querySelector("#dates-table tbody");
         if (examData.dates_table) {
-          datesBody.innerHTML = splitList(examData.dates_table)
-            .map(d => {
-              const [event, date] = d.split(":");
-              return `<tr><td>${event || ""}</td><td>${date || ""}</td></tr>`;
-            })
-            .join("");
+          datesTbody.innerHTML = splitList(examData.dates_table).map(row => {
+            const [event, date] = row.split(":").map(s => s.trim());
+            return event && date ? `<tr><td>${event}</td><td>${date}</td></tr>` : "";
+          }).join("");
+        } else {
+          document.getElementById("dates-table").style.display = "none";
         }
-
-        // Tips
-        document.getElementById("tips-list").innerHTML =
-          splitList(examData.tips_list).map(i => `<li>${i}</li>`).join("");
 
         // Warnings
         if (examData.warnings_list) {
           document.getElementById("warning-box").style.display = "block";
           document.getElementById("warning-box").innerHTML =
-            splitList(examData.warnings_list).map(i => `<li>${i}</li>`).join("");
+            `<strong>Common mistakes to avoid:</strong><br>` +
+            splitList(examData.warnings_list).map(w => `❌ ${w}`).join("<br>");
         }
 
         // Links
         if (examData.pdf_link) document.getElementById("pdf-link").href = examData.pdf_link;
         if (examData.pyq_link) document.getElementById("pyq-link").href = examData.pyq_link;
 
-        // YouTube Study Links
+        // YouTube
         if (examData.youtube_list) {
           const ytArr = splitList(examData.youtube_list);
           const ytList = [];
           for (let i = 0; i < ytArr.length; i += 2) {
-            const label = ytArr[i] || `Link ${i/2+1}`;
+            const title = ytArr[i] || `Video ${i / 2 + 1}`;
             const url = ytArr[i + 1] || "#";
-            ytList.push(`<li><a href="${url}" target="_blank">${label}</a></li>`);
+            ytList.push(`<li>📺 <a href="${url}" target="_blank">${title}</a></li>`);
           }
           document.getElementById("youtube-list").innerHTML = ytList.join("");
+        } else {
+          document.getElementById("youtube-list").parentElement.style.display = "none";
         }
 
-        // Official site
+        // Official site + Apply
         if (examData.official_website)
           document.getElementById("official-site").href = examData.official_website;
-
-        // Apply link
         if (examData.apply_link)
           document.getElementById("apply-link").href = examData.apply_link;
-
-        // Rural Tip
-        if (examData.rural_tip) {
-          document.getElementById("rural-tip-box").style.display = "block";
-          document.getElementById("rural-tip-text").textContent = examData.rural_tip;
-        }
       })
-      .catch(err => console.error("Error loading exam:", err));
+      .catch(err => {
+        console.error("Error loading exam:", err);
+        document.getElementById("exam-title").textContent = "Failed to load exam data.";
+      });
   });
 </script>
+
 
 
 
