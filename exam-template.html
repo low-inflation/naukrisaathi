@@ -162,17 +162,17 @@
     © 2025 Naukri Saathi | SBI YFI Fellowship Project | All resources are free & official
   </footer>
 
- <script>
+<script>
   const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRCaqsjus7r9xvHab6eqJOwjWXw6DSqm1K6_x3E-eDCtqac_Vb7K0V0cRYQC1My5g52yj5uCZZCZQmU/pub?output=tsv";
 
   function getExamIdFromUrl() {
     const params = new URLSearchParams(window.location.search);
-    return params.get("exam_id") || "";   // ✅ match jobs-template
+    return params.get("exam_id") || "";
   }
 
   function splitList(text) {
     if (!text) return [];
-    return text.split("|").map(item => item.trim()).filter(item => item);
+    return text.split("|").map(i => i.trim()).filter(i => i);
   }
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -185,98 +185,99 @@
         const headers = rows[0].map(h => h.trim().toLowerCase());
         const dataRows = rows.slice(1);
 
-const examRow = dataRows.find(r => {
-  const rowExamId = (r[3] || "").trim();
-  return rowExamId === examId;
-});
+        // 🔑 Make a lookup map for fast access
+        const examMap = new Map();
+        dataRows.forEach(r => {
+          const obj = {};
+          headers.forEach((h, i) => (obj[h] = (r[i] || "").trim()));
+          if (obj.exam_id) examMap.set(obj.exam_id, obj);
+        });
 
-if (!examRow) {
-  document.getElementById("exam-title").textContent = "Exam Not Found";
-  return;
-}
+        const examData = examMap.get(examId);
+        if (!examData) {
+          document.getElementById("exam-title").textContent = "Exam Not Found";
+          return;
+        }
 
-const examData = {};
-headers.forEach((h, i) => examData[h] = (examRow[i] || "").trim());
+        // Title
+        document.getElementById("exam-title").textContent = examData.title || "No Title";
+        document.getElementById("pageTitle").textContent = examData.title || "Exam Details";
 
-// Title
-document.getElementById("exam-title").textContent = examData.title || "No Title";
-document.getElementById("pageTitle").textContent = examData.title || "Exam Details";
+        // Why Box
+        if (examData.why_points) {
+          document.getElementById("why-box").textContent = examData.why_points;
+        }
 
-// Why box
-if (examData.why_points) {
-  document.getElementById("why-box").textContent = examData.why_points;
-}
+        // About
+        document.getElementById("about-list").innerHTML =
+          splitList(examData.about_points).map(i => `<li>${i}</li>`).join("");
 
-// About
-document.getElementById("about-list").innerHTML =
-  splitList(examData.about_points).map(i => `<li>${i}</li>`).join("");
+        // Eligibility
+        document.getElementById("eligibility-list").innerHTML =
+          splitList(examData.eligibility_list).map(i => `<li>${i}</li>`).join("");
 
-// Eligibility
-document.getElementById("eligibility-list").innerHTML =
-  splitList(examData.eligibility_list).map(i => `<li>${i}</li>`).join("");
+        // Roles
+        document.getElementById("roles-list").innerHTML =
+          splitList(examData.roles_list).map(i => `<li>${i}</li>`).join("");
 
-// Roles
-document.getElementById("roles-list").innerHTML =
-  splitList(examData.roles_list).map(i => `<li>${i}</li>`).join("");
+        // Pattern
+        document.getElementById("pattern-list").innerHTML =
+          splitList(examData.pattern_list).map(i => `<li>${i}</li>`).join("");
 
-// Pattern
-document.getElementById("pattern-list").innerHTML =
-  splitList(examData.pattern_list).map(i => `<li>${i}</li>`).join("");
+        // Dates (Event: Date format)
+        const datesBody = document.querySelector("#dates-table tbody");
+        if (examData.dates_table) {
+          datesBody.innerHTML = splitList(examData.dates_table)
+            .map(d => {
+              const [event, date] = d.split(":");
+              return `<tr><td>${event || ""}</td><td>${date || ""}</td></tr>`;
+            })
+            .join("");
+        }
 
-// Dates (expects "Event: Date|Event: Date")
-const datesBody = document.querySelector("#dates-table tbody");
-if (examData.dates_table) {
-  datesBody.innerHTML = splitList(examData.dates_table)
-    .map(d => {
-      const parts = d.split(":");
-      return `<tr><td>${parts[0] || ""}</td><td>${parts[1] || ""}</td></tr>`;
-    })
-    .join("");
-}
+        // Tips
+        document.getElementById("tips-list").innerHTML =
+          splitList(examData.tips_list).map(i => `<li>${i}</li>`).join("");
 
-// Tips
-document.getElementById("tips-list").innerHTML =
-  splitList(examData.tips_list).map(i => `<li>${i}</li>`).join("");
+        // Warnings
+        if (examData.warnings_list) {
+          document.getElementById("warning-box").style.display = "block";
+          document.getElementById("warning-box").innerHTML =
+            splitList(examData.warnings_list).map(i => `<li>${i}</li>`).join("");
+        }
 
-// Warnings
-if (examData.warnings_list) {
-  document.getElementById("warning-box").style.display = "block";
-  document.getElementById("warning-box").innerHTML =
-    splitList(examData.warnings_list).map(i => `<li>${i}</li>`).join("");
-}
+        // Links
+        if (examData.pdf_link) document.getElementById("pdf-link").href = examData.pdf_link;
+        if (examData.pyq_link) document.getElementById("pyq-link").href = examData.pyq_link;
 
-// Links
-if (examData.pdf_link) document.getElementById("pdf-link").href = examData.pdf_link;
-if (examData.pyq_link) document.getElementById("pyq-link").href = examData.pyq_link;
+        // YouTube Study Links
+        if (examData.youtube_list) {
+          const ytArr = splitList(examData.youtube_list);
+          const ytList = [];
+          for (let i = 0; i < ytArr.length; i += 2) {
+            ytList.push(`<li><a href="${ytArr[i + 1]}" target="_blank">${ytArr[i]}</a></li>`);
+          }
+          document.getElementById("youtube-list").innerHTML = ytList.join("");
+        }
 
-// YouTube list (format: Title|URL|Title|URL)
-if (examData.youtube_list) {
-  const ytArr = splitList(examData.youtube_list);
-  const ytList = [];
-  for (let i = 0; i < ytArr.length; i += 2) {
-    ytList.push(`<li><a href="${ytArr[i+1]}" target="_blank">${ytArr[i]}</a></li>`);
-  }
-  document.getElementById("youtube-list").innerHTML = ytList.join("");
-}
+        // Official site
+        if (examData.official_website)
+          document.getElementById("official-site").href = examData.official_website;
 
-// Official site
-if (examData.official_website)
-  document.getElementById("official-site").href = examData.official_website;
+        // Apply link
+        if (examData.apply_link)
+          document.getElementById("apply-link").href = examData.apply_link;
 
-// Apply link
-if (examData.apply_link)
-  document.getElementById("apply-link").href = examData.apply_link;
-
-// Rural tip
-if (examData.rural_tip) {
-  document.getElementById("rural-tip-box").style.display = "block";
-  document.getElementById("rural-tip-text").textContent = examData.rural_tip;
-}
-
+        // Rural Tip
+        if (examData.rural_tip) {
+          document.getElementById("rural-tip-box").style.display = "block";
+          document.getElementById("rural-tip-text").textContent = examData.rural_tip;
+        }
       })
       .catch(err => console.error("Error loading exam:", err));
   });
 </script>
+
 
 </body>
 </html>
