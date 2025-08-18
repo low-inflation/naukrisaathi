@@ -185,11 +185,10 @@
         const headers = rows[0].map(h => h.trim().toLowerCase());
         const dataRows = rows.slice(1);
 
-        const examRow = dataRows.find(r => {
-          const rowType = (r[0] || "").trim().toLowerCase();
-          const rowExamId = (r[3] || "").trim();
-          return rowType === "detail" && rowExamId === examId;
-        });
+const examRow = dataRows.find(r => {
+  const rowExamId = (r[3] || "").trim();
+  return rowExamId === examId;
+});
 
         if (!examRow) {
           document.getElementById("headerTitle").textContent = "Exam Not Found";
