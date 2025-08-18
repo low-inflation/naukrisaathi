@@ -189,8 +189,11 @@
         const examMap = new Map();
         dataRows.forEach(r => {
           const obj = {};
-          headers.forEach((h, i) => (obj[h] = (r[i] || "").trim()));
-          if (obj.exam_id) examMap.set(obj.exam_id, obj);
+headers.forEach((h, i) => {
+  obj[h] = (r[i] || "").trim();
+});
+if (obj.exam_id) examMap.set(obj.exam_id, obj);
+
         });
 
         const examData = examMap.get(examId);
