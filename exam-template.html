@@ -176,12 +176,53 @@
         return text.split("|").map(item => item.trim()).filter(item => item);
       }
 
-      fetch(sheetUrl)
-        .then(res => res.text())
-        .then(text => {
-          const rows = text.trim().split("\n").map(r => r.split("\t"));
-          const headers = rows[0].map(h => h.trim().toLowerCase());
-          const dataRows = rows.slice(1);
+fetch(sheetUrl)
+  .then(res => res.text())
+  .then(text => {
+    const rows = text.trim().split("\n").map(r => r.split("\t"));
+    const headers = rows[0].map(h => h.trim().toLowerCase());
+    const dataRows = rows.slice(1);
+
+    const params = new URLSearchParams(window.location.search);
+    const examId = params.get("exam_id");
+
+    const row = dataRows.find(r => r[headers.indexOf("exam_id")] === examId);
+    if (!row) return;
+
+    const job = {};
+    headers.forEach((h, i) => job[h] = row[i] || "");
+
+    document.getElementById("headerTitle").textContent = job.title;
+
+    // Fill exam detail sections
+    document.getElementById("whyPoints").innerHTML = (job.why_points || "").split("|").map(p => `<li>${p}</li>`).join("");
+    document.getElementById("aboutPoints").innerHTML = (job.about_points || "").split("|").map(p => `<li>${p}</li>`).join("");
+    document.getElementById("eligibilityList").innerHTML = (job.eligibility_list || "").split("|").map(p => `<li>${p}</li>`).join("");
+    document.getElementById("rolesList").innerHTML = (job.roles_list || "").split("|").map(p => `<li>${p}</li>`).join("");
+    document.getElementById("patternList").innerHTML = (job.pattern_list || "").split("|").map(p => `<li>${p}</li>`).join("");
+    document.getElementById("datesTable").innerHTML = (job.dates_table || "").split("|").map(p => `<li>${p}</li>`).join("");
+    document.getElementById("tipsList").innerHTML = (job.tips_list || "").split("|").map(p => `<li>${p}</li>`).join("");
+    document.getElementById("warningsList").innerHTML = (job.warnings_list || "").split("|").map(p => `<li>${p}</li>`).join("");
+
+    if (job.pdf_link) document.getElementById("pdfLink").href = job.pdf_link;
+    if (job.pyq_link) document.getElementById("pyqLink").href = job.pyq_link;
+    if (job.official_website) document.getElementById("officialWebsite").href = job.official_website;
+    if (job.apply_link) document.getElementById("applyLink").href = job.apply_link;
+
+    // Youtube
+    if (job.youtube_list) {
+      const ytItems = job.youtube_list.split("|").map((p, i) => i % 2 === 0 ? `<li><a href="${job.youtube_list.split("|")[i+1]}">${p}</a></li>` : "").join("");
+      document.getElementById("youtubeList").innerHTML = ytItems;
+    }
+
+    // Rural Tip Highlight
+    if (job.rural_tip) {
+      document.getElementById("ruralTipBox").innerHTML = `<strong>🌱 Rural Tip:</strong> ${job.rural_tip}`;
+      document.getElementById("ruralTipBox").style.display = "block";
+    }
+  })
+  .catch(err => console.error("Error loading exam details:", err));
+
 
 // Get exam_id from URL
 const examId = getExamIdFromUrl();
