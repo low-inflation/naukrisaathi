@@ -182,21 +182,26 @@
       .then(res => res.text())
       .then(text => {
         const rows = text.trim().split("\n").map(r => r.split("\t"));
-        const headers = rows[0].map(h => h.trim().toLowerCase());
+        // 🔑 Normalize headers
+        const headers = rows[0].map(h =>
+          h.trim().toLowerCase().replace(/\s+/g, "_")
+        );
         const dataRows = rows.slice(1);
 
-        // 🔑 Make a lookup map for fast access
+        // 🔑 Build map for fast lookup
         const examMap = new Map();
         dataRows.forEach(r => {
           const obj = {};
-headers.forEach((h, i) => {
-  obj[h] = (r[i] || "").trim();
-});
-if (obj.exam_id) examMap.set(obj.exam_id, obj);
-
+          headers.forEach((h, i) => {
+            obj[h] = (r[i] || "").trim();
+          });
+          if (obj.exam_id) examMap.set(obj.exam_id, obj);
         });
 
         const examData = examMap.get(examId);
+        console.log("Exam Data:", examData); // 🔍 Debug
+        console.log("Keys:", Object.keys(examData));
+
         if (!examData) {
           document.getElementById("exam-title").textContent = "Exam Not Found";
           return;
@@ -258,7 +263,9 @@ if (obj.exam_id) examMap.set(obj.exam_id, obj);
           const ytArr = splitList(examData.youtube_list);
           const ytList = [];
           for (let i = 0; i < ytArr.length; i += 2) {
-            ytList.push(`<li><a href="${ytArr[i + 1]}" target="_blank">${ytArr[i]}</a></li>`);
+            const label = ytArr[i] || `Link ${i/2+1}`;
+            const url = ytArr[i + 1] || "#";
+            ytList.push(`<li><a href="${url}" target="_blank">${label}</a></li>`);
           }
           document.getElementById("youtube-list").innerHTML = ytList.join("");
         }
@@ -280,6 +287,7 @@ if (obj.exam_id) examMap.set(obj.exam_id, obj);
       .catch(err => console.error("Error loading exam:", err));
   });
 </script>
+
 
 
 </body>
