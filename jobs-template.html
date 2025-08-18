@@ -129,10 +129,6 @@ fetch(sheetUrl)
   .catch(err => console.error("Error loading jobs:", err));
 
 
-// Prepare section lists
-const stateList = [];
-const centralList = [];
-
 // Filter only rows for jobs list type & category
 dataRows
   .filter(r => {
