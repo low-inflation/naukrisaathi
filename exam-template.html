@@ -265,28 +265,23 @@
           document.getElementById("youtube-list").parentElement.style.display = "none";
         }
 
-        // Official site + Apply
-        if (examData.official_website)
-          document.getElementById("official-site").href = examData.official_website;
-        if (examData.apply_link)
-          document.getElementById("apply-link").href = examData.apply_link;
-      })
-      .catch(err => {
-        console.error("Error loading exam:", err);
-        document.getElementById("exam-title").textContent = "Failed to load exam data.";
+// Official site + Apply
+if (examData.official_website)
+  document.getElementById("official-site").href = examData.official_website;
+if (examData.apply_link)
+  document.getElementById("apply-link").href = examData.apply_link;
 
-        // Rural Tip
+// Rural Tip
 if (examData.rural_tip) {
-  const tipBox = document.createElement("div");
-  tipBox.style.marginTop = "20px";
-  tipBox.style.padding = "15px";
-  tipBox.style.borderRadius = "10px";
-  tipBox.style.background = "#fff8e1";
-  tipBox.style.border = "1px solid #ffd54f";
-  tipBox.style.boxShadow = "0 2px 6px rgba(0,0,0,0.1)";
-  tipBox.innerHTML = `<strong style="color:#ff6f00;">🌱 Rural Tip:</strong> ${examData.rural_tip}`;
-  document.querySelector("main").appendChild(tipBox);
+  document.getElementById("rural-tip-text").textContent = examData.rural_tip;
+  document.getElementById("rural-tip-box").style.display = "block";
 }
+})
+.catch(err => {
+  console.error("Error loading exam:", err);
+  document.getElementById("exam-title").textContent = "Failed to load exam data.";
+});
+
 
       });
   });
