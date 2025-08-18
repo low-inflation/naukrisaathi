@@ -223,10 +223,6 @@ fetch(sheetUrl)
   })
   .catch(err => console.error("Error loading exam details:", err));
 
-
-// Get exam_id from URL
-const examId = getExamIdFromUrl();
-
 // Find the detail row
 const examRow = dataRows.find(r => {
   const rowType = (r[0] || "").trim().toLowerCase(); // type
