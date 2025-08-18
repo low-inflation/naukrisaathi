@@ -85,7 +85,6 @@
           const job = {};
           headers.forEach((h, i) => job[h] = (r[i] || "").trim());
 
-          if (job.type.toLowerCase() !== "list") return; // only list rows
           if (job.category.toLowerCase() !== category) return; // only selected category
 
           const liHTML = `<li>
