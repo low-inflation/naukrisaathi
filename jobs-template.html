@@ -71,116 +71,64 @@
     document.getElementById("headerTitle").textContent = titles[category] || "Government Jobs";
     document.getElementById("pageTitle").textContent = titles[category] || "Government Jobs";
 
-fetch(sheetUrl)
-  .then(res => res.text())
-  .then(text => {
-    const rows = text.trim().split("\n").map(r => r.split("\t"));
-    const headers = rows[0].map(h => h.trim().toLowerCase());
-    const dataRows = rows.slice(1);
+    fetch(sheetUrl)
+      .then(res => res.text())
+      .then(text => {
+        const rows = text.trim().split("\n").map(r => r.split("\t"));
+        const headers = rows[0].map(h => h.trim().toLowerCase());
+        const dataRows = rows.slice(1);
 
-    const list = document.getElementById("jobList");
-    list.innerHTML = "";
+        const stateList = [];
+        const centralList = [];
 
-    const stateList = [];
-    const centralList = [];
+        dataRows.forEach(r => {
+          const job = {};
+          headers.forEach((h, i) => job[h] = (r[i] || "").trim());
 
-    const category = getCategoryFromUrl();
+          if (job.type.toLowerCase() !== "list") return; // only list rows
+          if (job.category.toLowerCase() !== category) return; // only selected category
 
-    dataRows.forEach(r => {
-      const job = {};
-      headers.forEach((h, i) => job[h] = r[i] || "");
+          const liHTML = `<li>
+            <a href="exam-template.html?exam_id=${job.exam_id}">
+              <strong>${job.title}</strong>${job.description}<br>
+              <span class="meta">${job.meta}</span>
+            </a>
+          </li>`;
 
-      if (job.category.toLowerCase() !== category) return; // only show this category
+          if ((job.section || "").toLowerCase() === "state") {
+            stateList.push(liHTML);
+          } else {
+            centralList.push(liHTML);
+          }
+        });
 
-      const liHTML = `<li>
-        <a href="exam-template.html?exam_id=${job.exam_id}">
-          <strong>${job.title}</strong>${job.description}<br>
-          <span class="meta">${job.meta}</span>
-        </a>
-      </li>`;
+        const list = document.getElementById("jobList");
+        list.innerHTML = "";
 
-      if (job.section && job.section.trim().toLowerCase() === "state") {
-        stateList.push(liHTML);
-      } else {
-        centralList.push(liHTML);
-      }
-    });
+        if (stateList.length) {
+          const h2 = document.createElement("h2");
+          h2.textContent = "🌾 Assam State Govt Exams";
+          list.appendChild(h2);
+          const ul = document.createElement("ul");
+          ul.className = "job-summary";
+          ul.innerHTML = stateList.join("");
+          list.appendChild(ul);
+        }
 
-    if (stateList.length) {
-      const h2 = document.createElement("h2");
-      h2.textContent = "🌾 Assam State Govt Exams";
-      list.appendChild(h2);
-      const ul = document.createElement("ul");
-      ul.className = "job-summary";
-      ul.innerHTML = stateList.join("");
-      list.appendChild(ul);
-    }
-
-    if (centralList.length) {
-      const h2 = document.createElement("h2");
-      h2.textContent = "🏛️ Central Level Exams (All India)";
-      list.appendChild(h2);
-      const ul = document.createElement("ul");
-      ul.className = "job-summary";
-      ul.innerHTML = centralList.join("");
-      list.appendChild(ul);
-    }
-  })
-  .catch(err => console.error("Error loading jobs:", err));
-
-
-// Filter only rows for jobs list type & category
-dataRows
-  .filter(r => {
-    const rowType = (r[0] || "").trim().toLowerCase(); // type
-    const rowCategory = (r[1] || "").trim().toLowerCase(); // category
-    return rowType === "list" && rowCategory === category;
-  })
-  .forEach(r => {
-    const job = {};
-    headers.forEach((h, i) => job[h] = (r[i] || "").trim());
-
-    const liHTML = `<li><a href="exam-template.html?id=${job.exam_id}">
-                      <strong>${job.title}</strong>${job.description}<br>
-                      <span class="meta">${job.meta}</span>
-                    </a></li>`;
-
-    const sectionValue = (job.section || "").toLowerCase();
-    if (sectionValue === "state") {
-      stateList.push(liHTML);
-    } else if (sectionValue === "central") {
-      centralList.push(liHTML);
-    }
-  });
-
-// Output State section first
-const listContainer = document.getElementById("jobList");
-listContainer.innerHTML = "";
-
-if (stateList.length) {
-  const h2 = document.createElement("h2");
-  h2.textContent = "🌾 Assam State Govt Exams";
-  listContainer.appendChild(h2);
-  const ul = document.createElement("ul");
-  ul.className = "job-summary";
-  ul.innerHTML = stateList.join("");
-  listContainer.appendChild(ul);
-}
-
-if (centralList.length) {
-  const h2 = document.createElement("h2");
-  h2.textContent = "🏛️ Central Level Exams (All India)";
-  listContainer.appendChild(h2);
-  const ul = document.createElement("ul");
-  ul.className = "job-summary";
-  ul.innerHTML = centralList.join("");
-  listContainer.appendChild(ul);
-}
-
+        if (centralList.length) {
+          const h2 = document.createElement("h2");
+          h2.textContent = "🏛️ Central Level Exams (All India)";
+          list.appendChild(h2);
+          const ul = document.createElement("ul");
+          ul.className = "job-summary";
+          ul.innerHTML = centralList.join("");
+          list.appendChild(ul);
+        }
       })
       .catch(err => console.error("Error loading jobs:", err));
   });
 </script>
+
 
 <!-- Google Translate -->
 <script type="text/javascript">
