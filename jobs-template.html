@@ -90,7 +90,7 @@
           const liHTML = `<li>
             <a href="exam-template.html?exam_id=${job.exam_id}">
               <strong>${job.title}</strong>${job.description}<br>
-              <span class="meta">${job.meta}</span>
+              <span class="meta">${job.meta.replace(/\s*\|\s*/g, '<br>')}</span>
             </a>
           </li>`;
 
