@@ -110,7 +110,9 @@
   <h1 id="exam-title">Loading...</h1>
   <p>Your Friend in the Journey to a Government Job</p>
 </header>
-
+  
+<div id="google_translate_element" style="text-align:center; margin-top:10px;"></div>
+  
   <main>
     <div class="info-box" id="why-box"></div>
 
@@ -284,6 +286,17 @@ if (examData.rural_tip) {
 });
 </script>
 
+<!-- Google Translate -->
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'as,hi',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+  }
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 
 
