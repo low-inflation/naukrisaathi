@@ -209,6 +209,15 @@ ul li::before {
   left: 0;
   font-weight: bold;
 }
+.meta {
+  display: block;
+  line-height: 1.5;
+  margin-top: 6px;
+  color: #444;
+  font-size: 0.95rem;
+  white-space: normal;
+}
+
 @media (max-width: 600px) {
   body {
     font-size: 14px;
@@ -226,6 +235,7 @@ ul li::before {
     padding: 15px;
   }
 }
+
 
 
 
